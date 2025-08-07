@@ -4,8 +4,7 @@
   "description": "Saumya Chaurasia's Portfolio Website",
   "main": "index.html",
   "scripts": {
-    "start": "npx http-server . -p 3000",
-    "build": "echo 'No build process needed for static site'"
+    "start": "npx http-server . -p 3000"
   },
   "keywords": [
     "portfolio",
