@@ -1,0 +1,21 @@
+{
+  "name": "saumya-portfolio",
+  "version": "1.0.0",
+  "description": "Saumya Chaurasia's Portfolio Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000",
+    "build": "echo 'No build process needed for static site'"
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "full-stack",
+    "android-developer"
+  ],
+  "author": "Saumya Chaurasia",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
