@@ -744,7 +744,8 @@ a.fa-x,
 
 /* work section starts */
 .work {
-  --project-border-color: #a68eff;
+  --project-border-light: #9fbcff;
+  --project-border-dark: #4d68df;
   min-height: auto;
   background:
     radial-gradient(circle at top left, rgba(119, 67, 219, 0.14), transparent 36%),
@@ -795,8 +796,10 @@ a.fa-x,
 .work .box-container .box {
   background: #ffffff;
   border-radius: 0.8rem;
-  border: 0.15rem solid var(--project-border-color);
-  box-shadow: 0 1.4rem 3rem rgba(88, 100, 147, 0.12);
+  border: 0.12rem solid var(--project-border-light);
+  box-shadow:
+    0 0 0 0.22rem rgba(77, 104, 223, 0.22),
+    0 1.4rem 3rem rgba(88, 100, 147, 0.12);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -805,7 +808,9 @@ a.fa-x,
 }
 .work .box-container .box:hover {
   transform: translateY(-0.5rem);
-  box-shadow: 0 1.8rem 3.8rem rgba(88, 100, 147, 0.16);
+  box-shadow:
+    0 0 0 0.24rem rgba(77, 104, 223, 0.32),
+    0 1.8rem 3.8rem rgba(88, 100, 147, 0.16);
 }
 .work .project-card__media {
   aspect-ratio: 16 / 9;
@@ -917,7 +922,7 @@ a.fa-x,
 .work .project-card__actions {
   margin-top: auto;
   padding-top: 2.2rem;
-  border-top: 0.1rem solid var(--project-border-color);
+  border-top: 0.1rem solid rgba(77, 104, 223, 0.28);
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
@@ -930,7 +935,7 @@ a.fa-x,
   gap: 0.8rem;
   padding: 1.35rem 1.6rem;
   border-radius: 0.8rem;
-  border: 0.1rem solid var(--project-border-color);
+  border: 0.1rem solid rgba(77, 104, 223, 0.28);
   color: #2e3553;
   background: #ffffff;
   font-size: 1.45rem;
@@ -942,7 +947,7 @@ a.fa-x,
 }
 .work .project-card__link--primary {
   background: #f3eeff;
-  border-color: var(--project-border-color);
+  border-color: rgba(77, 104, 223, 0.4);
   color: #6f43ff;
 }
 .work .work-actions {
