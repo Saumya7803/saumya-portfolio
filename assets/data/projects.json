@@ -23,7 +23,7 @@
     "label": "JavaScript App",
     "summary": "A browser-based virtual assistant project exploring interactive commands, front-end logic, and conversational UI ideas.",
     "description": "Built as a JavaScript assistant experience that experiments with user interaction and lightweight automation on the web.",
-    "image": "/assets/images/projects/virtual-assistant-ai.png",
+    "image": "/assets/images/projects/virtual-assistant-ai.jpg",
     "imageAlt": "AI-generated illustration for the Virtual Assistant project.",
     "tags": ["JavaScript", "Voice UI", "Web App", "Interaction"],
     "links": {

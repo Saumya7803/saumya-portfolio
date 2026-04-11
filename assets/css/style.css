@@ -744,6 +744,7 @@ a.fa-x,
 
 /* work section starts */
 .work {
+  --project-border-color: #a68eff;
   min-height: auto;
   background:
     radial-gradient(circle at top left, rgba(119, 67, 219, 0.14), transparent 36%),
@@ -794,7 +795,7 @@ a.fa-x,
 .work .box-container .box {
   background: #ffffff;
   border-radius: 0.8rem;
-  border: 0.1rem solid rgba(124, 134, 178, 0.18);
+  border: 0.15rem solid var(--project-border-color);
   box-shadow: 0 1.4rem 3rem rgba(88, 100, 147, 0.12);
   overflow: hidden;
   display: flex;
@@ -916,7 +917,7 @@ a.fa-x,
 .work .project-card__actions {
   margin-top: auto;
   padding-top: 2.2rem;
-  border-top: 0.1rem solid #eceffd;
+  border-top: 0.1rem solid var(--project-border-color);
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
@@ -929,7 +930,7 @@ a.fa-x,
   gap: 0.8rem;
   padding: 1.35rem 1.6rem;
   border-radius: 0.8rem;
-  border: 0.1rem solid #e5e8f4;
+  border: 0.1rem solid var(--project-border-color);
   color: #2e3553;
   background: #ffffff;
   font-size: 1.45rem;
@@ -941,7 +942,7 @@ a.fa-x,
 }
 .work .project-card__link--primary {
   background: #f3eeff;
-  border-color: #ebe2ff;
+  border-color: var(--project-border-color);
   color: #6f43ff;
 }
 .work .work-actions {
