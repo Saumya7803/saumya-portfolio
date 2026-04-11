@@ -1,0 +1,83 @@
+.work-page {
+  padding-top: 10rem;
+}
+
+.work-page .button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 96rem;
+  margin: 2.6rem auto 0;
+}
+
+.work-page .button-group .btn {
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  border: 0.1rem solid rgba(124, 134, 178, 0.26);
+  background: #ffffff;
+  color: #27304f;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 1rem 2rem rgba(88, 100, 147, 0.08);
+}
+
+.work-page .button-group .btn:hover,
+.work-page .button-group .btn.is-active {
+  background: #101942;
+  border-color: #101942;
+  color: #ffffff;
+}
+
+.work-page .projects-status {
+  margin-top: 2rem;
+}
+
+.work-page .projects-empty {
+  margin: 2rem auto 0;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #5d6785;
+  text-transform: none;
+}
+
+.backbtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.2rem;
+}
+
+.backbtn .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem 2.4rem;
+  border-radius: 999px;
+  background: #101942;
+  color: #ffffff;
+  box-shadow: 0 1.6rem 3rem rgba(16, 25, 66, 0.18);
+}
+
+.backbtn .btn span {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.backbtn .btn:hover {
+  background: #6f43ff;
+}
+
+@media (max-width: 768px) {
+  .work-page {
+    padding-top: 9rem;
+  }
+
+  .work-page .button-group {
+    justify-content: flex-start;
+  }
+
+  .work-page .button-group .btn {
+    flex: 0 1 auto;
+  }
+}
