@@ -20,8 +20,24 @@
         "icon": "https://img.icons8.com/color/48/000000/firebase.png"
     },
     {
+        "name": "Flutter",
+        "icon": "https://img.icons8.com/color/48/000000/flutter.png"
+    },
+    {
+        "name": "Dart",
+        "icon": "https://img.icons8.com/color/48/000000/dart.png"
+    },
+    {
         "name": "Android",
         "icon": "https://img.icons8.com/fluency/48/000000/android-os.png"
+    },
+    {
+        "name": "Android SDK",
+        "icon": "https://img.icons8.com/color/48/000000/android-os.png"
+    },
+    {
+        "name": "Android Studio",
+        "icon": "https://img.icons8.com/color/48/000000/android-studio--v3.png"
     },
     {
         "name": "MaterialUI",
@@ -58,6 +74,10 @@
     {
         "name": "Java",
         "icon": "https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png"
+    },
+    {
+        "name": "C",
+        "icon": "https://img.icons8.com/color/48/000000/c-programming.png"
     },
     {
         "name": "Kotlin",
@@ -116,7 +136,19 @@
         "icon": "https://img.icons8.com/glyph-neue/48/ffffff/github.png"
     },
     {
-        "name": "WordPress",
-        "icon": "https://img.icons8.com/color/48/000000/wordpress.png"
-    }    
+        "name": "WebView",
+        "icon": "https://img.icons8.com/color/48/000000/web.png"
+    },
+    {
+        "name": "Native App Programming",
+        "icon": "https://img.icons8.com/color/48/000000/source-code.png"
+    },
+    {
+        "name": "UI Design",
+        "icon": "https://img.icons8.com/color/48/000000/design.png"
+    },
+    {
+        "name": "REST API Integration",
+        "icon": "https://img.icons8.com/color/48/000000/api-settings.png"
+    }
 ]

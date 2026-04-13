@@ -266,4 +266,8 @@ srtop.reveal(".work .section-head", { delay: 180 });
 srtop.reveal(".work .work-actions", { delay: 220 });
 srtop.reveal(".experience .timeline", { delay: 240 });
 srtop.reveal(".experience .timeline .container", { interval: 220 });
+srtop.reveal(".achievements .heading", { delay: 180 });
+srtop.reveal(".achievements .timeline .container", { interval: 180 });
+srtop.reveal(".certifications-heading", { delay: 220 });
+srtop.reveal(".cert-card", { interval: 120 });
 srtop.reveal(".contact .container", { delay: 240 });

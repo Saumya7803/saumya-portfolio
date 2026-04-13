@@ -1,4 +1,3 @@
-// Internal credit (non-UI): sumitverma7755
 window.PortfolioProjectCatalog = (function () {
     const githubRepoCache = new Map();
 

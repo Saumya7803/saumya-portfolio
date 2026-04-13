@@ -1186,6 +1186,242 @@ a.fa-x,
 /* experience media queries ends */
 /* experience section ends */
 
+/* achievements section starts */
+.achievements {
+  min-height: 0;
+  background:
+    radial-gradient(circle at top right, rgba(111, 67, 255, 0.18), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(15, 84, 255, 0.16), transparent 38%),
+    linear-gradient(180deg, #f7f8ff 0%, #eef2ff 100%);
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.achievements .heading {
+  color: #131b3d;
+  margin-bottom: 2.2rem;
+}
+
+.achievements .timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.achievements .timeline::after {
+  content: "";
+  position: absolute;
+  width: 0.5rem;
+  background: #101942;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -0.25rem;
+}
+
+.achievements .container {
+  padding: 1rem 4rem;
+  position: relative;
+  width: 50%;
+}
+
+.achievements .container::after {
+  content: "\f091";
+  position: absolute;
+  width: 2.8rem;
+  height: 2.8rem;
+  right: -1.5rem;
+  background-color: #ffffff;
+  border: 0.35rem solid #ff8b2f;
+  top: 2rem;
+  border-radius: 50%;
+  z-index: 2;
+  font-size: 1.35rem;
+  text-align: center;
+  font-weight: 900;
+  color: #101942;
+  font-family: "Font Awesome 6 Free";
+  line-height: 2.2rem;
+}
+
+.achievements .left {
+  left: 0;
+}
+
+.achievements .right {
+  left: 50%;
+}
+
+.achievements .left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 2.6rem;
+  width: 0;
+  right: 3rem;
+  border: medium solid #f08b2a;
+  border-width: 1rem 0 1rem 1rem;
+  border-color: transparent transparent transparent #f08b2a;
+}
+
+.achievements .right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 2.6rem;
+  width: 0;
+  left: 3rem;
+  border: medium solid #f08b2a;
+  border-width: 1rem 1rem 1rem 0;
+  border-color: transparent #f08b2a transparent transparent;
+}
+
+.achievements .right::after {
+  left: -1.4rem;
+}
+
+.achievements .content {
+  border-radius: 1.2rem;
+  background: #ffffff;
+  border: 0.16rem solid rgba(16, 25, 66, 0.12);
+  box-shadow: 0 1.4rem 2.8rem rgba(45, 64, 128, 0.16);
+  overflow: hidden;
+}
+
+.achievements .content .tag {
+  padding: 1.8rem 1.8rem 0.9rem;
+}
+
+.achievements .content .tag h2 {
+  font-size: 1.8rem;
+  line-height: 1.55;
+  color: #101942;
+  text-transform: none;
+}
+
+.achievements .content .desc {
+  padding: 0 1.8rem 1.8rem;
+}
+
+.achievements .content .desc h3 {
+  font-size: 1.45rem;
+  color: #5a6284;
+  margin-bottom: 0.8rem;
+  text-transform: none;
+}
+
+.achievements .content .desc p {
+  font-size: 1.4rem;
+  color: #2d3658;
+  line-height: 1.7;
+  text-transform: none;
+}
+
+.achievements .featured-achievement {
+  border: 0.16rem solid rgba(111, 67, 255, 0.36);
+  box-shadow: 0 1.6rem 3rem rgba(111, 67, 255, 0.2);
+}
+
+.achievement-btn,
+.cert-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+  padding: 1.05rem 1.7rem;
+  border-radius: 999px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: #ff8b2f;
+  color: #ffffff;
+  box-shadow: 0 0.8rem 1.8rem rgba(255, 139, 47, 0.3);
+  text-transform: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.achievement-btn:hover,
+.cert-btn:hover {
+  background: #eb7418;
+  transform: scale(1.05);
+  box-shadow: 0 1.1rem 2.2rem rgba(235, 116, 24, 0.38);
+}
+
+.certifications-wrap {
+  margin-top: 5rem;
+  padding-top: 1rem;
+}
+
+.certifications-heading {
+  font-size: 3rem;
+  color: #101942;
+  text-align: center;
+  margin-bottom: 2.6rem;
+  text-transform: none;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  gap: 1.8rem;
+}
+
+.cert-card {
+  background: #ffffff;
+  border: 0.16rem solid rgba(16, 25, 66, 0.12);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  box-shadow: 0 1.2rem 2.2rem rgba(56, 73, 132, 0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 20rem;
+}
+
+.cert-card h4 {
+  font-size: 1.7rem;
+  color: #141f49;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.cert-card p {
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: #5e6789;
+  text-transform: none;
+}
+
+@media screen and (max-width: 900px) {
+  .achievements .timeline::after {
+    left: 3.2rem;
+    margin-left: 0;
+  }
+
+  .achievements .container {
+    width: 100%;
+    padding-left: 7.8rem;
+    padding-right: 1.8rem;
+  }
+
+  .achievements .container::before {
+    left: 6.1rem;
+    border: medium solid #f08b2a;
+    border-width: 1rem 1rem 1rem 0;
+    border-color: transparent #f08b2a transparent transparent;
+  }
+
+  .achievements .left::after,
+  .achievements .right::after {
+    left: 1.8rem;
+  }
+
+  .achievements .right {
+    left: 0;
+  }
+}
+/* achievements section ends */
+
 /* contact section starts */
 .contact {
   background: #e5ecfb;
@@ -1213,6 +1449,7 @@ a.fa-x,
   width: 100%;
   height: 40rem;
   position: relative;
+  object-fit: contain;
 }
 .contact .content form {
   width: 45%;

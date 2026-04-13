@@ -1,6 +1,6 @@
 # Saumya Portfolio
 
-A modern personal portfolio website showcasing featured projects, skills, education, experience, and contact details.
+A modern personal portfolio website showcasing featured projects, skills, education, experience, achievements, certifications, and contact details.
 
 ## Tech Stack
 
@@ -16,6 +16,7 @@ A modern personal portfolio website showcasing featured projects, skills, educat
 - `index.html` - Main landing page
 - `projects/` - Project archive page
 - `experience/` - Experience timeline page
+- `skills.json` - Skills data rendered in the Skills section
 - `assets/data/projects.json` - Shared project catalog
 - `assets/js/project-catalog.js` - Shared project card renderer
 
@@ -27,23 +28,25 @@ A modern personal portfolio website showcasing featured projects, skills, educat
 npm install
 ```
 
-2. Start local server:
+1. Start local server:
 
 ```bash
 npm run dev
 ```
 
-3. Open the local URL shown in terminal.
+1. Open the local URL shown in terminal.
 
 ## Key Features
 
 - Synced featured projects and archive from one catalog file
 - Project cards with screenshots, tags, and GitHub links
-- Responsive sections: Home, About, Skills, Education, Experience, Contact
+- Responsive sections: Home, About, Skills, Education, Projects, Experience, Achievements, Contact
+- Professional Achievements timeline with verified links
+- Certifications grid with direct certificate actions
+- Updated skills set including Flutter, Dart, Android SDK/Studio, WebView, Native App Programming, and REST API Integration
+- Contact section includes guided email preference text
 - Improved accessibility and SEO metadata
 
 ## Deployment
 
 Configured for Vercel using `vercel.json`.
-
-<!-- Internal credit (non-rendered): sumitverma7755 -->
