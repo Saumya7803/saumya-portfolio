@@ -424,6 +424,13 @@ a.fa-x,
     font-size: 2.2rem;
   }
 }
+
+@media (max-width: 768px) {
+  .home .content,
+  .home .image {
+    flex: 1 1 100%;
+  }
+}
 /* hero media queries ends*/
 /* hero section end */
 
@@ -1202,6 +1209,42 @@ a.fa-x,
   margin-bottom: 2.2rem;
 }
 
+.achievements .internship-highlight-card {
+  max-width: 1200px;
+  margin: 0 auto 2.8rem;
+  padding: 2.2rem;
+  background: #ffffff;
+  border-radius: 1.2rem;
+  border: 0.16rem solid rgba(111, 67, 255, 0.36);
+  box-shadow: 0 1.6rem 3rem rgba(111, 67, 255, 0.2);
+}
+
+.achievements .internship-highlight-card h3 {
+  font-size: 2.2rem;
+  color: #101942;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.achievements .internship-highlight-card p {
+  font-size: 1.45rem;
+  color: #2d3658;
+  line-height: 1.7;
+  text-transform: none;
+}
+
+.achievements .internship-highlight-card .achievement-company {
+  font-weight: 700;
+  color: #101942;
+  margin-top: 0.6rem;
+}
+
+.achievements .internship-highlight-card .achievement-year {
+  color: #5a6284;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
 .achievements .timeline {
   position: relative;
   max-width: 1200px;
@@ -1317,6 +1360,24 @@ a.fa-x,
   text-transform: none;
 }
 
+.achievements .content .desc .achievement-company {
+  font-weight: 700;
+  color: #101942;
+  margin-bottom: 0.2rem;
+}
+
+.achievements .content .desc ul {
+  margin: 0;
+  padding-left: 1.8rem;
+}
+
+.achievements .content .desc ul li {
+  font-size: 1.4rem;
+  color: #2d3658;
+  line-height: 1.7;
+  text-transform: none;
+}
+
 .achievements .featured-achievement {
   border: 0.16rem solid rgba(111, 67, 255, 0.36);
   box-shadow: 0 1.6rem 3rem rgba(111, 67, 255, 0.2);
@@ -1393,6 +1454,11 @@ a.fa-x,
 }
 
 @media screen and (max-width: 900px) {
+  .achievements .internship-highlight-card {
+    margin: 0 1.8rem 2.4rem;
+    padding: 1.8rem;
+  }
+
   .achievements .timeline::after {
     left: 3.2rem;
     margin-left: 0;
