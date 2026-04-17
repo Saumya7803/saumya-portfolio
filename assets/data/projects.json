@@ -1,0 +1,82 @@
+[
+  {
+    "id": "weather-dashboard",
+    "name": "Weather Dashboard",
+    "featured": true,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "A weather dashboard interface focused on presenting forecasts and key climate details in a clean, simple layout.",
+    "description": "A lightweight front-end project centered on weather information, interface clarity, and responsive presentation.",
+    "image": "/assets/images/projects/weather-dashboard-ai.png",
+    "imageAlt": "AI-generated illustration for the Weather Dashboard project.",
+    "tags": ["CSS3", "HTML5", "JavaScript", "Dashboard UI"],
+    "links": {
+      "code": "https://github.com/Saumya7803/Weather-Dashboard",
+      "demo": ""
+    }
+  },
+  {
+    "id": "virtual-assistant",
+    "name": "Virtual Assistant",
+    "featured": true,
+    "category": "frontend",
+    "label": "JavaScript App",
+    "summary": "A browser-based virtual assistant project exploring interactive commands, front-end logic, and conversational UI ideas.",
+    "description": "Built as a JavaScript assistant experience that experiments with user interaction and lightweight automation on the web.",
+    "image": "/assets/images/projects/virtual-assistant-ai.jpg",
+    "imageAlt": "AI-generated illustration for the Virtual Assistant project.",
+    "tags": ["JavaScript", "Voice UI", "Web App", "Interaction"],
+    "links": {
+      "code": "https://github.com/Saumya7803/Virtual-Assistant",
+      "demo": ""
+    }
+  },
+  {
+    "id": "online-movie-booking",
+    "name": "Online Movie Ticket Booking System",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Booking System",
+    "summary": "A movie ticket booking project built around a cinema-style reservation flow, ticketing logic, and user-friendly UI structure.",
+    "description": "Designed to explore the experience of browsing movies, selecting seats, and moving through an end-to-end booking flow.",
+    "image": "/assets/images/projects/online-movie-booking-ai.png",
+    "imageAlt": "AI-generated illustration for the Online Movie Ticket Booking System project.",
+    "tags": ["JavaScript", "Booking Flow", "UI Design", "Web Project"],
+    "links": {
+      "code": "https://github.com/Saumya7803/Online-Movie-Ticket-Booking-System-Python",
+      "demo": ""
+    }
+  },
+  {
+    "id": "tiffy-tiffin-service",
+    "name": "Tiffin Service App",
+    "featured": true,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "An Android app for ordering home-cooked tiffin meals with authentication, meal browsing, and cart management.",
+    "description": "Built with Kotlin, Android Jetpack, and Firebase to support a practical food-ordering flow on mobile devices.",
+    "image": "/assets/images/projects/tiffin-service-ai.png",
+    "imageAlt": "AI-generated illustration for the Tiffin Service App project.",
+    "tags": ["Kotlin", "Android", "Firebase", "Jetpack"],
+    "links": {
+      "code": "https://github.com/Saumya7803/Tiffy_Tiffin_Service_Provider_App-master",
+      "demo": ""
+    }
+  },
+  {
+    "id": "multiple-diseases-prediction",
+    "name": "Multiple Diseases Prediction System",
+    "featured": true,
+    "category": "ai",
+    "label": "ML App",
+    "summary": "A machine learning web app that predicts multiple diseases from medical inputs with confidence-focused feedback.",
+    "description": "Built with Streamlit to present Diabetes, Heart Disease, and Parkinson's predictions in a practical experimentation interface.",
+    "image": "/assets/images/projects/multiple-disease-ai.png",
+    "imageAlt": "AI-generated illustration for the Multiple Diseases Prediction System project.",
+    "tags": ["Python", "Streamlit", "Machine Learning", "Prediction UI"],
+    "links": {
+      "code": "https://github.com/Saumya7803/Multiple-Diseases-Prediction-System-",
+      "demo": ""
+    }
+  }
+]

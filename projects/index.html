@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse a curated archive of Saumya Chaurasia's featured GitHub projects across full-stack, frontend, AI, and mobile work." />
+    <meta name="theme-color" content="#101942" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Projects | Saumya Chaurasia" />
+    <meta property="og:description" content="Curated project archive featuring full-stack systems, frontend experiments, AI projects, and mobile builds." />
+    <meta property="og:url" content="https://saumya-portfolio-zeta.vercel.app/projects/" />
+    <meta property="og:image" content="https://saumya-portfolio-zeta.vercel.app/assets/images/projects/portfolio-live.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Projects | Saumya Chaurasia" />
+    <meta name="twitter:description" content="Explore Saumya Chaurasia's featured GitHub projects with previews, tags, and direct links." />
+    <meta name="twitter:image" content="https://saumya-portfolio-zeta.vercel.app/assets/images/projects/portfolio-live.png" />
+    <link rel="canonical" href="https://saumya-portfolio-zeta.vercel.app/projects/" />
+    <link rel="stylesheet" href="../assets/css/style.css?v=20260411a">
+    <link rel="stylesheet" href="./style.css?v=20260411a">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link id='favicon' rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-png">
+    <title>Projects | Saumya Chaurasia</title>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- navbar starts -->
+<header>
+        <a href="../index.html" class="logo"><i class="fab fa-node-js"></i> Saumya</a>
+
+        <button id="menu" class="fas fa-bars" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation"></button>
+        <nav class="navbar" id="primary-navigation">
+            <ul>
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#education">Education</a></li>
+            <li><a class="active" href="/projects/">Projects</a></li>
+            <li><a href="../index.html#experience">Experience</a></li>
+            <li><a href="../index.html#achievements">Achievements</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+</header>
+<!-- navbar ends -->
+
+<main id="main-content">
+
+<!-- work project section starts -->
+<section class="work work-page" id="work">
+
+  <div class="section-head">
+    <h2 class="heading"><i class="fas fa-laptop-code"></i> Project <span>Archive</span></h2>
+    <p class="work-copy">A synced project library powered by the same curated catalog used on the homepage, organized to surface standout work quickly.</p>
+  </div>
+  
+  <div id="filters" class="button-group">
+    <button class="btn is-active" type="button" data-filter="all" aria-pressed="true">All Projects</button>
+    <button class="btn" type="button" data-filter="featured" aria-pressed="false">Featured</button>
+    <button class="btn" type="button" data-filter="fullstack" aria-pressed="false">Full Stack</button>
+    <button class="btn" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
+    <button class="btn" type="button" data-filter="creative" aria-pressed="false">Creative Web</button>
+    <button class="btn" type="button" data-filter="ai" aria-pressed="false">Data & AI</button>
+    <button class="btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+  </div>
+
+  <p class="projects-status" id="projectsStatus" role="status" aria-live="polite">Loading project archive...</p>
+
+  <div class="box-container" id="projectsContainer"></div>
+
+  <div class="backbtn">
+    <a href="../index.html#work" class="btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Home</span>
+  </a>
+  </div>
+
+</section>
+<!-- work project section ends -->
+
+</main>
+
+<!-- scroll top btn -->
+<a href="#work" class="fas fa-angle-up" id="scroll-top" aria-label="Scroll to top"></a>
+<!-- scroll back to top -->
+
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS STARTS ==== -->
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- scroll reveal anim -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
+
+<script src="../assets/js/project-catalog.js"></script>
+<script src="./script.js"></script>
+
+</body>
+</html>
