@@ -278,10 +278,19 @@ header .navbar ul li a:hover{
   font-size: 1.3rem;
   padding-top: 1.5rem;
   padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.experience .content .tag .tag-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 .experience .content .desc{
   margin-left: 1.5rem;
   padding-bottom: 1rem;
+  padding-right: 1.5rem;
 }
 .experience .content .desc h3{
   font-size: 1.5rem;
@@ -289,6 +298,32 @@ header .navbar ul li a:hover{
 }
 .experience .content .desc p{
   font-size: 1.2rem;
+}
+.experience .employment-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.experience .employment-badge--full-time {
+  background: #e8f1ff;
+  border-color: #9fc1ff;
+  color: #124dbd;
+}
+.experience .employment-badge--part-time {
+  background: #f2eaff;
+  border-color: #c9aaf8;
+  color: #6e2cbc;
+}
+.experience .employment-badge--internship {
+  background: #fff2d9;
+  border-color: #ffd59b;
+  color: #9a5a00;
 }
 /* view all button */
 .morebtn{
@@ -333,6 +368,12 @@ header .navbar ul li a:hover{
   width: 100%;
   padding-left: 70px;
   padding-right: 25px;
+  }
+  .experience .content .tag .tag-head {
+    align-items: flex-start;
+  }
+  .experience .employment-badge {
+    font-size: 1rem;
   }
   .experience .container::before {
   left: 60px;
