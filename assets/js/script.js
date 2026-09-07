@@ -206,7 +206,49 @@ function initWorklensModal() {
     });
 }
 
+window.switchOnedeskPreview = function (btn) {
+    if (!btn) return;
+    const card = btn.closest(".featured-professional-card") || document;
+    const mainImg = card.querySelector("#onedeskMainPreview") || document.getElementById("onedeskMainPreview");
+    const previewSrc = btn.getAttribute("data-preview");
+    if (mainImg && previewSrc) {
+        mainImg.style.opacity = "0.4";
+        mainImg.style.transform = "scale(0.98)";
+        setTimeout(() => {
+            mainImg.src = previewSrc;
+            mainImg.style.opacity = "1";
+            mainImg.style.transform = "scale(1)";
+        }, 120);
+    }
+    card.querySelectorAll(".saas-thumb-btn").forEach((b) => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+};
+
+window.switchOnedeskModalGallery = function (btn) {
+    if (!btn) return;
+    const modal = btn.closest("#gravenOneDeskModal") || document;
+    const galleryImg = modal.querySelector("#onedeskModalMainImg");
+    const captionEl = modal.querySelector("#onedeskModalCaption");
+    const previewSrc = btn.getAttribute("data-img");
+    const title = btn.getAttribute("data-title");
+    if (galleryImg && previewSrc) {
+        galleryImg.src = previewSrc;
+    }
+    if (captionEl && title) {
+        captionEl.textContent = title;
+    }
+    modal.querySelectorAll(".onedesk-gallery-thumb").forEach((b) => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+};
+
 window.openContributionModal = async function (projectId) {
+    if (projectId === "graven-onedesk") {
+        const onedeskModal = document.getElementById("gravenOneDeskModal");
+        if (onedeskModal) {
+            openModalContainer(onedeskModal);
+            return;
+        }
+    }
     if (projectId === "graven-automation") {
         const gravenModal = document.getElementById("gravenAutomationModal");
         if (gravenModal) {
@@ -298,6 +340,7 @@ window.openContributionModal = async function (projectId) {
 
 window.closeContributionModal = function () {
     const modal = document.getElementById("contributionModal");
+    const onedeskModal = document.getElementById("gravenOneDeskModal");
     const gravenModal = document.getElementById("gravenAutomationModal");
     const schneiderModal = document.getElementById("schneiderVfdModal");
     const metalModal = document.getElementById("gravenMetalModal");
@@ -308,6 +351,10 @@ window.closeContributionModal = function () {
     if (modal) {
         modal.classList.remove("is-active");
         modal.setAttribute("aria-hidden", "true");
+    }
+    if (onedeskModal) {
+        onedeskModal.classList.remove("is-active");
+        onedeskModal.setAttribute("aria-hidden", "true");
     }
     if (gravenModal) {
         gravenModal.classList.remove("is-active");
@@ -355,6 +402,10 @@ function initContributionModal() {
     const closeBtnBottom = document.getElementById("closeContribModalBottom");
     const modal = document.getElementById("contributionModal");
 
+    const closeOnedeskBtn = document.getElementById("closeGravenOneDeskModal");
+    const closeOnedeskBtnBottom = document.getElementById("closeGravenOneDeskModalBottom");
+    const onedeskModal = document.getElementById("gravenOneDeskModal");
+
     const closeGravenBtn = document.getElementById("closeGravenModal");
     const closeGravenBtnBottom = document.getElementById("closeGravenModalBottom");
     const gravenModal = document.getElementById("gravenAutomationModal");
@@ -379,11 +430,48 @@ function initContributionModal() {
     const closeNavriseBtnBottom = document.getElementById("closeNavriseModalBottom");
     const navriseModal = document.getElementById("navriseModal");
 
-    if (closeBtn) closeBtn.addEventListener("click", window.closeContributionModal);
-    if (closeBtnBottom) closeBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (closeBtn) {
+        closeBtn.addEventListener("click", window.closeContributionModal);
+    }
+    if (closeBtnBottom) {
+        closeBtnBottom.addEventListener("click", window.closeContributionModal);
+    }
     if (modal) {
         modal.addEventListener("click", (e) => {
-            if (e.target === modal) window.closeContributionModal();
+            if (e.target === modal) {
+                window.closeContributionModal();
+            }
+        });
+    }
+
+    if (closeOnedeskBtn) {
+        closeOnedeskBtn.addEventListener("click", window.closeContributionModal);
+    }
+    if (closeOnedeskBtnBottom) {
+        closeOnedeskBtnBottom.addEventListener("click", window.closeContributionModal);
+    }
+    if (onedeskModal) {
+        onedeskModal.addEventListener("click", (e) => {
+            if (e.target === onedeskModal) {
+                window.closeContributionModal();
+            }
+        });
+    }
+
+    const onedeskLiveUrl = "https://gravenonedesk.in/";
+    const btnOnedeskVisit = document.getElementById("btnOnedeskVisit");
+    const btnOnedeskFooterVisit = document.getElementById("btnOnedeskFooterVisit");
+
+    if (btnOnedeskVisit) {
+        btnOnedeskVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(onedeskLiveUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnOnedeskFooterVisit) {
+        btnOnedeskFooterVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(onedeskLiveUrl, "_blank", "noopener,noreferrer");
         });
     }
 

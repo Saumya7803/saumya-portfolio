@@ -21,6 +21,40 @@
     "isPrivate": true
   },
   {
+    "id": "graven-onedesk",
+    "name": "Graven OneDesk",
+    "company": "Graven OneDesk",
+    "companyLogo": "./assets/images/logos/graven-onedesk.png",
+    "featured": true,
+    "isFeaturedProfessional": true,
+    "category": "professional",
+    "label": "⭐ Featured Professional Project",
+    "role": "Full Stack Developer",
+    "roleDisplay": "Full Stack Developer • Graven OneDesk",
+    "summary": "Comprehensive enterprise business-management SaaS platform connecting communication, sales, procurement, invoicing, HR, employee self-service, and business operations.",
+    "description": "Comprehensive enterprise business-management SaaS platform connecting communication, sales, procurement, invoicing, HR, employee self-service, and business operations.",
+    "image": "./assets/images/projects/graven-onedesk-cover.png",
+    "imageAlt": "Graven OneDesk Business Management & Enterprise SaaS Platform",
+    "tags": [
+      "Full-Stack Development",
+      "SaaS Platform",
+      "Business Management",
+      "Communication Hub",
+      "GST Integration",
+      "API Integrations"
+    ],
+    "featurePills": [
+      "Communication Hub",
+      "GST & E-Invoicing",
+      "Procurement Queue",
+      "HR & Self-Service"
+    ],
+    "platform": "Web & Enterprise SaaS Platform",
+    "status": "Production / Live",
+    "liveUrl": "https://gravenonedesk.in/",
+    "isProfessional": true
+  },
+  {
     "id": "graven-automation",
     "name": "Graven Automation",
     "company": "Graven Automation",
