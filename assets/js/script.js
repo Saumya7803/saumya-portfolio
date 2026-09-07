@@ -79,45 +79,285 @@ async function loadSkills() {
 }
 
 async function loadFeaturedProjects() {
-    const projectsContainer = document.getElementById("projectsContainer");
+    const profContainer = document.getElementById("professionalProjectsContainer");
+    const acadContainer = document.getElementById("academicProjectsContainer");
 
-    if (!projectsContainer || !window.PortfolioProjectCatalog) {
+    if (!window.PortfolioProjectCatalog) {
         return;
     }
 
     try {
         const projects = await window.PortfolioProjectCatalog.load("./assets/data/projects.json");
-        const featuredProjects = window.PortfolioProjectCatalog.getFeatured(projects, 6);
+        window._projectCatalogCache = projects;
+        
+        const professionalProjects = projects.filter((p) => p.category === "professional");
+        const academicProjects = projects.filter((p) => p.category === "academic" || p.category === "frontend" || p.category === "fullstack" || p.category === "mobile" || p.category === "ai");
 
-        if (!featuredProjects.length) {
-            setProjectsStatus("Featured projects will be published here soon.", false);
-            projectsContainer.innerHTML = "";
-            return;
+        if (profContainer) {
+            window.PortfolioProjectCatalog.render(profContainer, professionalProjects);
         }
 
-        window.PortfolioProjectCatalog.render(projectsContainer, featuredProjects);
+        if (acadContainer) {
+            window.PortfolioProjectCatalog.render(acadContainer, academicProjects);
+        }
+
         setProjectsStatus("", false);
 
-        if (!shouldReduceEffects) {
+        if (!shouldReduceEffects && window.srtop) {
+            srtop.reveal(".founder-project-card", { delay: 200 });
+            srtop.reveal(".sub-projects-section", { interval: 200 });
             srtop.reveal(".work .box", { interval: 120 });
+            if (typeof srtop.sync === "function") {
+                srtop.sync();
+            }
         }
     } catch (error) {
         console.error(error);
-        projectsContainer.innerHTML = "";
         setProjectsStatus("Projects could not be loaded right now. Please try again shortly.", true);
     }
 }
 
-function setContactStatus(message, isError = false) {
-    const status = document.getElementById("contact-status");
+window._modalPrevScrollY = window._modalPrevScrollY ?? null;
 
-    if (!status) {
-        return;
+function openModalContainer(modal) {
+    if (!modal) return;
+    if (window._modalPrevScrollY === null) {
+        window._modalPrevScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    }
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    modal.scrollTop = 0;
+    const innerContent = modal.querySelector(".glass-modal, .graven-modal-content, .modal-content");
+    if (innerContent) {
+        innerContent.scrollTop = 0;
     }
 
-    status.textContent = message;
-    status.classList.toggle("is-error", isError);
+    modal.classList.add("is-active");
+    modal.setAttribute("aria-hidden", "false");
 }
+
+function closeModalContainer(modal) {
+    if (modal) {
+        modal.classList.remove("is-active");
+        modal.setAttribute("aria-hidden", "true");
+    }
+    const activeModals = document.querySelectorAll(".modal-overlay.is-active");
+    if (activeModals.length === 0) {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        if (window._modalPrevScrollY !== null) {
+            const restoreY = window._modalPrevScrollY;
+            window._modalPrevScrollY = null;
+            window.scrollTo({
+                top: restoreY,
+                left: 0,
+                behavior: "instant"
+            });
+        }
+    }
+}
+
+window.openWorklensModal = function () {
+    const modal = document.getElementById("worklensModal");
+    if (modal) {
+        openModalContainer(modal);
+    }
+};
+
+window.closeWorklensModal = function () {
+    const modal = document.getElementById("worklensModal");
+    if (modal) {
+        closeModalContainer(modal);
+    }
+};
+
+function initWorklensModal() {
+    const openBtn = document.getElementById("openWorklensModal");
+    const closeBtn = document.getElementById("closeWorklensModal");
+    const closeBtnBottom = document.getElementById("closeWorklensModalBottom");
+    const modal = document.getElementById("worklensModal");
+
+    if (openBtn) {
+        openBtn.addEventListener("click", window.openWorklensModal);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", window.closeWorklensModal);
+    }
+
+    if (closeBtnBottom) {
+        closeBtnBottom.addEventListener("click", window.closeWorklensModal);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                window.closeWorklensModal();
+            }
+        });
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            window.closeWorklensModal();
+            window.closeContributionModal();
+        }
+    });
+}
+
+window.openContributionModal = async function (projectId) {
+    if (projectId === "graven-automation") {
+        const gravenModal = document.getElementById("gravenAutomationModal");
+        if (gravenModal) {
+            openModalContainer(gravenModal);
+            return;
+        }
+    }
+    if (projectId === "graven-metal") {
+        const metalModal = document.getElementById("gravenMetalModal");
+        if (metalModal) {
+            openModalContainer(metalModal);
+            return;
+        }
+    }
+
+    const modal = document.getElementById("contributionModal");
+    if (!modal) return;
+
+    if (!window._projectCatalogCache) {
+        try {
+            const resp = await fetch("./assets/data/projects.json?v=" + Date.now());
+            window._projectCatalogCache = await resp.json();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const project = (window._projectCatalogCache || []).find((p) => p.id === projectId);
+    if (!project) return;
+
+    const titleEl = document.getElementById("contribTitle");
+    const roleEl = document.getElementById("contribRole");
+    const descEl = document.getElementById("contribDesc");
+    const tagsEl = document.getElementById("contribTags");
+    const highlightsEl = document.getElementById("contribHighlights");
+    const highlightsSec = document.getElementById("contribHighlightsSection");
+
+    if (titleEl) titleEl.textContent = project.name;
+    if (roleEl) roleEl.innerHTML = `<i class="fas fa-user-tie"></i> <strong>Role:</strong> ${project.role || "Software Engineer"}`;
+    if (descEl) descEl.textContent = project.description || project.summary;
+    
+    if (highlightsEl) {
+        if (project.highlights && project.highlights.length) {
+            highlightsEl.innerHTML = project.highlights
+                .map((h) => `<li><i class="fas fa-check-circle" style="color: #6f43ff; margin-right: 0.6rem;"></i>${h}</li>`)
+                .join("");
+            if (highlightsSec) highlightsSec.style.display = "block";
+        } else if (highlightsSec) {
+            highlightsSec.style.display = "none";
+        }
+    }
+
+    if (tagsEl) {
+        tagsEl.innerHTML = (project.tags || [])
+            .map((t) => `<span class="tech-tag">${t}</span>`)
+            .join("");
+    }
+
+    openModalContainer(modal);
+};
+
+window.closeContributionModal = function () {
+    const modal = document.getElementById("contributionModal");
+    const gravenModal = document.getElementById("gravenAutomationModal");
+    const metalModal = document.getElementById("gravenMetalModal");
+    
+    if (modal) {
+        modal.classList.remove("is-active");
+        modal.setAttribute("aria-hidden", "true");
+    }
+    if (gravenModal) {
+        gravenModal.classList.remove("is-active");
+        gravenModal.setAttribute("aria-hidden", "true");
+    }
+    if (metalModal) {
+        metalModal.classList.remove("is-active");
+        metalModal.setAttribute("aria-hidden", "true");
+    }
+
+    const activeModals = document.querySelectorAll(".modal-overlay.is-active");
+    if (activeModals.length === 0) {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        if (window._modalPrevScrollY !== null) {
+            const restoreY = window._modalPrevScrollY;
+            window._modalPrevScrollY = null;
+            window.scrollTo({
+                top: restoreY,
+                left: 0,
+                behavior: "instant"
+            });
+        }
+    }
+};
+
+function initContributionModal() {
+    const closeBtn = document.getElementById("closeContribModal");
+    const closeBtnBottom = document.getElementById("closeContribModalBottom");
+    const modal = document.getElementById("contributionModal");
+
+    const closeGravenBtn = document.getElementById("closeGravenModal");
+    const closeGravenBtnBottom = document.getElementById("closeGravenModalBottom");
+    const gravenModal = document.getElementById("gravenAutomationModal");
+
+    const closeMetalBtn = document.getElementById("closeGravenMetalModal");
+    const closeMetalBtnBottom = document.getElementById("closeGravenMetalModalBottom");
+    const metalModal = document.getElementById("gravenMetalModal");
+
+    if (closeBtn) closeBtn.addEventListener("click", window.closeContributionModal);
+    if (closeBtnBottom) closeBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) window.closeContributionModal();
+        });
+    }
+
+    if (closeGravenBtn) closeGravenBtn.addEventListener("click", window.closeContributionModal);
+    if (closeGravenBtnBottom) closeGravenBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (gravenModal) {
+        gravenModal.addEventListener("click", (e) => {
+            if (e.target === gravenModal) window.closeContributionModal();
+        });
+    }
+
+    if (closeMetalBtn) closeMetalBtn.addEventListener("click", window.closeContributionModal);
+    if (closeMetalBtnBottom) closeMetalBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (metalModal) {
+        metalModal.addEventListener("click", (e) => {
+            if (e.target === metalModal) window.closeContributionModal();
+        });
+    }
+
+    const playStoreUrl = "https://play.google.com/store/apps/details?id=com.gravenautomation&pli=1";
+    const btnPlayStoreInstall = document.getElementById("btnPlayStoreInstall");
+    const btnViewOnPlayStore = document.getElementById("btnViewOnPlayStore");
+
+    if (btnPlayStoreInstall) {
+        btnPlayStoreInstall.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(playStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnViewOnPlayStore) {
+        btnViewOnPlayStore.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(playStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+}
+
+
 
 function initContactForm() {
     const form = document.getElementById("contact-form");
@@ -166,7 +406,7 @@ function initTypingEffect() {
     }
 
     new Typed(".typing-text", {
-        strings: ["frontend development", "backend development", "web designing", "android development", "Flutter development", "web development"],
+        strings: ["software engineering", "full stack development", "Flutter development", "REST API integration", "AI product building", "production deployment"],
         loop: true,
         typeSpeed: 50,
         backSpeed: 25,
@@ -220,6 +460,38 @@ function scheduleChatWidgetLoad() {
     }
 }
 
+function initHeroStatsCounter() {
+    const statNumbers = document.querySelectorAll(".stat-number");
+    if (!statNumbers.length) return;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute("data-count"), 10);
+                if (isNaN(target)) return;
+
+                let count = 0;
+                const duration = 1200;
+                const stepTime = Math.max(30, Math.floor(duration / target));
+
+                const timer = setInterval(() => {
+                    count++;
+                    el.textContent = count + "+";
+                    if (count >= target) {
+                        el.textContent = target + "+";
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+
+                obs.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    statNumbers.forEach((num) => observer.observe(num));
+}
+
 $(document).ready(function () {
     $("#menu").on("click", function () {
         setMenuState(!$(this).hasClass("fa-times"));
@@ -253,11 +525,14 @@ $(document).ready(function () {
     });
 
     initContactForm();
+    initWorklensModal();
+    initContributionModal();
+    initHeroStatsCounter();
 });
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "visible") {
-        document.title = "Saumya Chaurasia | Full Stack & Flutter Developer";
+        document.title = "Saumya Chaurasia | Software Engineer & AI Product Builder";
         $("#favicon").attr("href", "assets/images/favicon.png");
     } else {
         document.title = "Come Back To Saumya's Portfolio";
@@ -275,7 +550,7 @@ const srtop = ScrollReveal({
     origin: "top",
     distance: shouldReduceEffects ? "40px" : "80px",
     duration: shouldReduceEffects ? 700 : 1000,
-    reset: !shouldReduceEffects,
+    reset: false,
 });
 
 if (shouldReduceEffects) {
@@ -285,11 +560,14 @@ if (shouldReduceEffects) {
     srtop.reveal(".work .section-head", { delay: 200 });
     srtop.reveal(".contact .container", { delay: 220 });
 } else {
-    srtop.reveal(".home .content h2", { delay: 200 });
-    srtop.reveal(".home .content p", { delay: 220 });
-    srtop.reveal(".home .content .btn", { delay: 240 });
+    srtop.reveal(".home .content h2", { delay: 180 });
+    srtop.reveal(".hero-designation", { delay: 200 });
+    srtop.reveal(".hero-intro", { delay: 220 });
+    srtop.reveal(".hero-cta-group", { delay: 240 });
+    srtop.reveal(".home .social-icons li", { interval: 100 });
+    srtop.reveal(".hero-badges", { delay: 280 });
+    srtop.reveal(".hero-stats", { delay: 300 });
     srtop.reveal(".home .image", { delay: 320 });
-    srtop.reveal(".home .social-icons li", { interval: 120 });
     srtop.reveal(".about .content h3", { delay: 200 });
     srtop.reveal(".about .content .tag", { delay: 220 });
     srtop.reveal(".about .content p", { delay: 240 });

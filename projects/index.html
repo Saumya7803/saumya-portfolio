@@ -16,7 +16,7 @@
     <meta name="twitter:description" content="Explore Saumya Chaurasia's featured GitHub projects with previews, tags, and direct links." />
     <meta name="twitter:image" content="https://saumya-portfolio-zeta.vercel.app/assets/images/projects/portfolio-live.png" />
     <link rel="canonical" href="https://saumya-portfolio-zeta.vercel.app/projects/" />
-    <link rel="stylesheet" href="../assets/css/style.css?v=20260411a">
+    <link rel="stylesheet" href="../assets/css/style.css?v=20260907_graven_v1">
     <link rel="stylesheet" href="./style.css?v=20260411a">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -59,15 +59,12 @@
   
   <div id="filters" class="button-group">
     <button class="btn is-active" type="button" data-filter="all" aria-pressed="true">All Projects</button>
-    <button class="btn" type="button" data-filter="featured" aria-pressed="false">Featured</button>
-    <button class="btn" type="button" data-filter="fullstack" aria-pressed="false">Full Stack</button>
-    <button class="btn" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
-    <button class="btn" type="button" data-filter="creative" aria-pressed="false">Creative Web</button>
-    <button class="btn" type="button" data-filter="ai" aria-pressed="false">Data & AI</button>
-    <button class="btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
+    <button class="btn" type="button" data-filter="founder" aria-pressed="false">🚀 Founder</button>
+    <button class="btn" type="button" data-filter="professional" aria-pressed="false">💼 Professional</button>
+    <button class="btn" type="button" data-filter="academic" aria-pressed="false">🎓 Academic &amp; Practice</button>
   </div>
 
-  <p class="projects-status" id="projectsStatus" role="status" aria-live="polite">Loading project archive...</p>
+  <p class="projects-status is-hidden" id="projectsStatus" role="status" aria-live="polite"></p>
 
   <div class="box-container" id="projectsContainer"></div>
 
@@ -83,6 +80,731 @@
 
 </main>
 
+<!-- WorkLens Case Study Modal -->
+<div id="worklensModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-content glass-modal">
+    <button class="modal-close" id="closeWorklensModal" aria-label="Close Case Study Modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-badge">🚀 Founder Project Showcase</div>
+      <h2 id="modalTitle">WorkLens — Case Study Overview</h2>
+      <p class="modal-tagline">AI-Powered Professional Social Learning Platform</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3><i class="fas fa-lightbulb"></i> Vision &amp; Platform Concept</h3>
+        <p>WorkLens is designed to solve the knowledge fragmentation challenge in professional learning. Traditional courses are often lengthy, whereas real insights come from ongoing workplace experiences. WorkLens empowers creator professionals to share bite-sized lessons, build communities, and provide AI-generated automated lesson summaries.</p>
+      </div>
+
+      <div class="modal-grid-2">
+        <div class="modal-card">
+          <h4><i class="fas fa-layer-group"></i> Technical Architecture</h4>
+          <ul>
+            <li><strong>Frontend:</strong> Cross-platform Mobile (Android) &amp; Web app built with <strong>Flutter</strong> &amp; reactive state management using <strong>Riverpod</strong>.</li>
+            <li><strong>Backend:</strong> Cloud infrastructure on <strong>Supabase</strong> with high-performance <strong>PostgreSQL</strong> database layer.</li>
+            <li><strong>AI Layer:</strong> Automated lesson summarization, topic tagging, and learning recommendations.</li>
+            <li><strong>Realtime:</strong> WebSockets for live notifications, thread updates, and user interactions.</li>
+          </ul>
+        </div>
+
+        <div class="modal-card">
+          <h4><i class="fas fa-star"></i> Core Features</h4>
+          <ul>
+            <li><strong>AI Lesson Summaries:</strong> Instant key takeaways generated from lesson content.</li>
+            <li><strong>Creator Profiles:</strong> Dedicated brand spaces for instructors, founders, and domain specialists.</li>
+            <li><strong>Communities:</strong> Peer-driven discussion groups sorted by engineering &amp; product topics.</li>
+            <li><strong>Real-time Notifications:</strong> Instant alerts on posts, interactions, and updates.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h3><i class="fas fa-user-shield"></i> Founder &amp; Lead Developer Scope</h3>
+        <p>As <strong>Founder &amp; Lead Developer</strong>, I oversee the complete product lifecycle: architecture design, database schema, state management, clean component hierarchy, API integrations, and security rules.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span class="modal-status-badge"><i class="fas fa-rocket"></i> Status: Active Private Startup Development</span>
+      <button class="btn-secondary" id="closeWorklensModalBottom" type="button">Close Overview</button>
+    </div>
+  </div>
+</div>
+
+<!-- Professional Contribution Modal -->
+<div id="contributionModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="contribTitle">
+  <div class="modal-content glass-modal">
+    <button class="modal-close" id="closeContribModal" aria-label="Close Contribution Modal">&times;</button>
+    <div class="modal-header">
+      <div class="modal-badge">💼 Professional Project Overview</div>
+      <h2 id="contribTitle">Project Contribution Details</h2>
+      <p class="modal-tagline" id="contribRole">Software Engineer</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3><i class="fas fa-tasks"></i> Professional Contribution &amp; Scope</h3>
+        <p id="contribDesc">Description of professional contribution...</p>
+      </div>
+
+      <div class="modal-section" id="contribHighlightsSection">
+        <h3><i class="fas fa-check-double"></i> Key Deliverables &amp; Achievements</h3>
+        <ul id="contribHighlights" class="modal-highlights-list"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h3><i class="fas fa-code"></i> Technology Stack</h3>
+        <div id="contribTags" class="tech-tags"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span class="modal-status-badge"><i class="fas fa-shield-alt"></i> Production Enterprise Build</span>
+      <button class="btn-secondary" id="closeContribModalBottom" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Graven Automation Light UI Modal -->
+<div id="gravenAutomationModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="gravenModalTitle">
+  <div class="graven-modal-content">
+    <button class="graven-modal-close" id="closeGravenModal" aria-label="Close Modal">&times;</button>
+    
+    <div class="graven-header">
+      <div class="graven-logo-box">
+        <img src="../assets/images/logos/graven-automation-official.svg" alt="Graven Automation Logo" />
+      </div>
+      <div class="graven-header-text">
+        <div class="graven-title-row">
+          <h2 id="gravenModalTitle">Graven Automation</h2>
+          <div class="graven-role-badge">
+            <i class="fas fa-user-tie"></i> <span>Role: <strong>Software Engineer</strong></span>
+          </div>
+        </div>
+        
+        <div class="graven-badges-row">
+          <span class="graven-pill-badge pill-pink"><i class="fas fa-mobile-alt"></i> Android + Web</span>
+          <span class="graven-pill-badge pill-green"><span class="live-dot"></span> Production Live</span>
+          <span class="graven-pill-badge pill-amber"><i class="far fa-calendar-alt"></i> Feb 2026 – Present</span>
+        </div>
+        
+        <p class="graven-description">
+          Developed the official production Flutter application for Graven Automation integrated with website and backend services. The app streamlines product catalog, RFQ management, user authentication and delivers a seamless experience for industrial automation customers.
+        </p>
+      </div>
+    </div>
+    
+    <div class="graven-grid-layout">
+      
+      <!-- Left Column -->
+      <div class="graven-left-col">
+        
+        <!-- Key Contributions -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-user-astronaut icon-orange"></i>
+            <h3>Key Contributions</h3>
+          </div>
+          <div class="graven-contributions-grid">
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Developed Production Flutter App</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Implemented RFQ Management System</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Integrated REST APIs &amp; Backend Services</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Enhanced App Performance &amp; UI/UX</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Implemented Supabase Authentication</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Published &amp; Maintained on Google Play</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Built Product Catalog &amp; Category System</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Bug Fixes &amp; Continuous Improvements</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-code icon-orange"></i>
+            <h3>Technology Stack</h3>
+          </div>
+          <div class="graven-tech-grid">
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" />
+              <span>Flutter</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" />
+              <span>React.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+              <span>Node.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <span class="ex-badge">EX</span>
+              <span>Express.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#3ECF8E"><path d="M12 2L2 19.5h8.5L12 22l10-17.5H13.5L12 2z"/></svg>
+              <span>Supabase</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
+              <span>MongoDB</span>
+            </div>
+            <div class="graven-tech-pill">
+              <i class="fas fa-network-wired" style="color:#8B5CF6"></i>
+              <span>REST APIs</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Highlights -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-star icon-orange"></i>
+            <h3>Project Highlights</h3>
+          </div>
+          <div class="graven-highlights-grid">
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-box-open"></i></div>
+              <span>Product Catalog</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-file-invoice"></i></div>
+              <span>RFQ Management</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+              <span>User Authentication</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-truck"></i></div>
+              <span>Live Tracking</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-layer-group"></i></div>
+              <span>Multi-Brand Support</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+              <span>Responsive UI</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-tachometer-alt"></i></div>
+              <span>Fast &amp; Secure</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-headset"></i></div>
+              <span>Customer Support</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Right Column -->
+      <div class="graven-right-col">
+        
+        <!-- Phone Mockups Container -->
+        <div class="graven-phones-wrapper">
+          <img src="../assets/images/projects/graven-mockup-triple.png" alt="Graven Automation Flutter App Mockups" class="graven-phones-hero-img" />
+        </div>
+        
+        <!-- Platform / Role / Duration / Status Stat Cards Row -->
+        <div class="graven-stats-grid">
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-phone"><i class="fas fa-mobile-alt"></i></div>
+            <div class="stat-label">Platform</div>
+            <div class="stat-value">Android + Web</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-user"><i class="fas fa-user-tie"></i></div>
+            <div class="stat-label">Role</div>
+            <div class="stat-value">Software Engineer</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-calendar"><i class="far fa-calendar-alt"></i></div>
+            <div class="stat-label">Duration</div>
+            <div class="stat-value">Feb 2026 – Present</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-rocket"><i class="fas fa-rocket"></i></div>
+            <div class="stat-label">Status</div>
+            <div class="stat-value live-val">Production Live <span class="green-dot"></span></div>
+          </div>
+        </div>
+        
+        <!-- Project Impact -->
+        <div class="graven-card impact-card">
+          <div class="graven-card-title">
+            <i class="fas fa-chart-line icon-orange"></i>
+            <h3>Project Impact</h3>
+          </div>
+          <ul class="impact-list">
+            <li><i class="fas fa-check-circle impact-check"></i> Streamlined RFQ workflow for customers and internal teams.</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Improved application performance and load time significantly.</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Enhanced user experience and customer satisfaction.</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Successfully deployed and maintained on Google Play.</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Helping industrial customers access automation products easily.</li>
+          </ul>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Google Play Store Section -->
+    <div class="graven-playstore-section">
+      <div class="playstore-section-header">
+        <img src="../assets/images/logos/google-play-store.svg" alt="Google Play Store" class="playstore-logo-icon" />
+        <div class="playstore-header-text">
+          <h4 class="playstore-heading">Google Play Store</h4>
+          <p class="playstore-subheading">Published and maintained on Google Play</p>
+        </div>
+      </div>
+      
+      <div class="playstore-card-content">
+        <!-- App Details Card -->
+        <div class="playstore-app-box">
+          <div class="playstore-app-meta">
+            <div class="playstore-app-icon-wrap">
+              <img src="../assets/images/logos/graven-automation-official.svg" alt="Graven Automation Logo" />
+            </div>
+            <div class="playstore-app-title-block">
+              <h5 class="playstore-app-title">Graven Automation</h5>
+              <span class="playstore-publisher">Graven Automation</span>
+            </div>
+          </div>
+          
+          <div class="playstore-stats-strip">
+            <div class="playstore-stat-item">
+              <div class="stat-top-val">4.8 <i class="fas fa-star star-filled"></i></div>
+              <div class="stat-bot-label">100+ reviews</div>
+            </div>
+            <div class="playstore-stat-divider"></div>
+            <div class="playstore-stat-item">
+              <div class="stat-top-val">10K+</div>
+              <div class="stat-bot-label">Downloads</div>
+            </div>
+            <div class="playstore-stat-divider"></div>
+            <div class="playstore-stat-item">
+              <div class="stat-top-val"><span class="badge-rated-3">3+</span></div>
+              <div class="stat-bot-label">Rated for 3+ <i class="fas fa-info-circle info-icon"></i></div>
+            </div>
+          </div>
+          
+          <button type="button" class="btn-playstore-install" id="btnPlayStoreInstall" onclick="window.open('https://play.google.com/store/apps/details?id=com.gravenautomation&pli=1', '_blank', 'noopener,noreferrer')">
+            Install
+          </button>
+        </div>
+
+        <!-- 3 App Screenshots -->
+        <div class="playstore-screens-row">
+          <div class="playstore-screen-card">
+            <img src="../assets/images/projects/graven-screen-home.png" alt="Graven Automation Home Screen" />
+          </div>
+          <div class="playstore-screen-card">
+            <img src="../assets/images/projects/graven-screen-products.png" alt="Graven Automation Products Screen" />
+          </div>
+          <div class="playstore-screen-card">
+            <img src="../assets/images/projects/graven-screen-rfqs.png" alt="Graven Automation My RFQs Screen" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer Actions -->
+    <div class="graven-footer">
+      <div class="graven-footer-left">
+        <span class="graven-pill-badge pill-green"><span class="live-dot"></span> Production Live</span>
+      </div>
+      <div class="graven-footer-right">
+        <button type="button" class="btn-graven-playstore" id="btnViewOnPlayStore" onclick="window.open('https://play.google.com/store/apps/details?id=com.gravenautomation&pli=1', '_blank', 'noopener,noreferrer')">
+          <i class="fas fa-external-link-alt"></i> View on Play Store
+        </button>
+        <button type="button" class="btn-graven-close-action" id="closeGravenModalBottom">
+          Close
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Graven Metal Light UI Modal -->
+<div id="gravenMetalModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="gravenMetalModalTitle">
+  <div class="graven-modal-content">
+    <button class="graven-modal-close" id="closeGravenMetalModal" aria-label="Close Modal">&times;</button>
+    
+    <div class="graven-header">
+      <div class="graven-logo-box">
+        <img src="../assets/images/logos/graven-automation-official.svg" alt="Graven Metal Logo" />
+      </div>
+      <div class="graven-header-text">
+        <div class="graven-title-row">
+          <h2 id="gravenMetalModalTitle">Graven Metal</h2>
+          <div class="graven-role-badge">
+            <i class="fas fa-user-tie"></i> <span>Role: <strong>Software Engineer</strong></span>
+          </div>
+        </div>
+        
+        <div class="graven-badges-row">
+          <span class="graven-pill-badge pill-pink"><i class="fas fa-mobile-alt"></i> Android + Web</span>
+          <span class="graven-pill-badge pill-green"><span class="live-dot"></span> Production Live</span>
+          <span class="graven-pill-badge pill-amber"><i class="far fa-calendar-alt"></i> Feb 2026 – Present</span>
+        </div>
+        
+        <p class="graven-description">
+          Developed the web platform and Flutter app for industrial metals inventory, customer quotes, and RESTful MongoDB services. The platform streamlines metal trading, real-time pricing, and customer communication.
+        </p>
+      </div>
+    </div>
+    
+    <div class="graven-grid-layout">
+      
+      <!-- Left Column -->
+      <div class="graven-left-col">
+        
+        <!-- Key Contributions -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-user-astronaut icon-orange"></i>
+            <h3>Key Contributions</h3>
+          </div>
+          <div class="graven-contributions-grid">
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Developed Web Platform &amp; Flutter App</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Real-time Metal Prices &amp; Categories</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Integrated REST APIs &amp; MongoDB</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Enhanced UI/UX &amp; Performance</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Implemented RFQ &amp; Quote System</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Deployed &amp; Maintained Cloud Services</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>User Authentication &amp; Role Management</span>
+            </div>
+            <div class="graven-contrib-item">
+              <i class="far fa-check-circle check-icon"></i>
+              <span>Bug Fixes &amp; Continuous Improvements</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-code icon-orange"></i>
+            <h3>Technology Stack</h3>
+          </div>
+          <div class="graven-tech-grid">
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" />
+              <span>Flutter</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" />
+              <span>React.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" />
+              <span>MongoDB</span>
+            </div>
+            <div class="graven-tech-pill">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+              <span>Node.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <span class="ex-badge">EX</span>
+              <span>Express.js</span>
+            </div>
+            <div class="graven-tech-pill">
+              <i class="fas fa-network-wired" style="color:#8B5CF6"></i>
+              <span>REST APIs</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Highlights -->
+        <div class="graven-card">
+          <div class="graven-card-title">
+            <i class="fas fa-star icon-orange"></i>
+            <h3>Project Highlights</h3>
+          </div>
+          <div class="graven-highlights-grid">
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-desktop"></i></div>
+              <span>Web &amp; Mobile Platform</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-code-branch"></i></div>
+              <span>REST API Integrated</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-lock"></i></div>
+              <span>Secure Authentication</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-file-invoice"></i></div>
+              <span>RFQ &amp; Quote System</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-rupee-sign"></i></div>
+              <span>Real-time Metal Prices</span>
+            </div>
+            <div class="graven-highlight-box">
+              <div class="highlight-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+              <span>Responsive UI/UX</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Right Column -->
+      <div class="graven-right-col">
+        
+        <!-- Device Mockups Container -->
+        <div class="metal-devices-wrapper">
+          
+          <!-- Desktop Window (Left) -->
+          <div class="metal-desktop-frame">
+            <div class="desktop-bar">
+              <span class="desktop-dot dot-red"></span>
+              <span class="desktop-dot dot-yellow"></span>
+              <span class="desktop-dot dot-green"></span>
+            </div>
+            <div class="desktop-content">
+              <div class="desktop-nav-mini">
+                <div class="nav-logo-text"><i class="fas fa-cube" style="color:#EA580C"></i> <strong>GRAVEN METAL</strong></div>
+                <div class="nav-links-mini">Home Products Categories Live Prices</div>
+              </div>
+              <div class="desktop-hero-mini">
+                <small style="color:#D97706; font-size:6px; font-weight:700">INDUSTRIAL METAL AND AUTOMATION SUPPLY</small>
+                <div style="font-weight:800; font-size:9.5px; color:#FFF; margin:2px 0 3px 0; line-height:1.2">GRAVEN METAL POWERS PROCUREMENT.</div>
+                <p style="font-size:6px; color:#94A3B8; line-height:1.2; margin-bottom:4px">Industrial metals, automation support, and sourcing follow-up for teams needing dependable supply.</p>
+                <div style="display:flex; gap:3px">
+                  <span style="background:#FF4500; color:#FFF; font-size:6px; padding:2px 5px; border-radius:3px; font-weight:700">Explore Metals →</span>
+                  <span style="border:1px solid #475569; color:#FFF; font-size:6px; padding:2px 5px; border-radius:3px">View Live Prices</span>
+                </div>
+              </div>
+              <div class="desktop-prices-mini">
+                <div style="font-size:6.5px; font-weight:700; color:#CBD5E1; margin-bottom:2px">Live Metal Prices</div>
+                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:2px">
+                  <div style="background:#1E293B; padding:3px; border-radius:3px; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Mild Steel</div>
+                    <div style="font-size:6.5px; font-weight:700; color:#FFF">$930/Coil</div>
+                  </div>
+                  <div style="background:#1E293B; padding:3px; border-radius:3px; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Aluminium</div>
+                    <div style="font-size:6.5px; font-weight:700; color:#34D399">$4.90/Ingot</div>
+                  </div>
+                  <div style="background:#1E293B; padding:3px; border-radius:3px; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Brass</div>
+                    <div style="font-size:6.5px; font-weight:700; color:#34D399">$9,720/Ton</div>
+                  </div>
+                  <div style="background:#1E293B; padding:3px; border-radius:3px; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Copper</div>
+                    <div style="font-size:6.5px; font-weight:700; color:#FFF">$8,560/Ton</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Middle Mobile Phone (App Home) -->
+          <div class="phone-frame metal-phone-center">
+            <div class="phone-screen dark-phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status-bar" style="color:#FFF">
+                <span>12:08</span>
+                <div class="status-icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></div>
+              </div>
+              <div class="phone-app-header" style="color:#FFF">
+                <div class="app-logo-mini">
+                  <img src="../assets/images/logos/graven-automation-official.svg" alt="logo" />
+                  <div class="app-title-block">
+                    <strong style="color:#FFF">GRAVEN METALS</strong>
+                    <small style="color:#94A3B8">Premium metal trading</small>
+                  </div>
+                </div>
+                <i class="far fa-bell" style="color:#FFF"></i>
+              </div>
+              <div class="phone-search-bar" style="background:#1E293B; color:#94A3B8">
+                <i class="fas fa-search"></i>
+                <span>Search metal, product, categories...</span>
+              </div>
+              <div class="phone-hero-banner" style="background:linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)">
+                <div class="banner-text"><strong>STRENGTH IN EVERY METAL WE TRADE</strong></div>
+                <button class="banner-btn">Explore Now →</button>
+              </div>
+              <div class="categories-section-mini">
+                <div class="sec-head" style="color:#FFF"><strong>Live Metal Prices</strong> <a href="#" style="color:#EA580C">View All</a></div>
+                <div style="display:flex; gap:3px; margin-bottom:4px">
+                  <div style="background:#1E293B; padding:3px; border-radius:4px; flex:1; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Mild Steel</div>
+                    <div style="font-size:7px; font-weight:700; color:#FFF">$930/Coil</div>
+                  </div>
+                  <div style="background:#1E293B; padding:3px; border-radius:4px; flex:1; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Aluminium</div>
+                    <div style="font-size:7px; font-weight:700; color:#10B981">$4.90/Ingot</div>
+                  </div>
+                  <div style="background:#1E293B; padding:3px; border-radius:4px; flex:1; text-align:center">
+                    <div style="font-size:5.5px; color:#94A3B8">Brass</div>
+                    <div style="font-size:7px; font-weight:700; color:#10B981">$9,720/Ton</div>
+                  </div>
+                </div>
+                <div class="sec-head" style="color:#FFF"><strong>Categories</strong></div>
+                <div class="cat-grid-mini">
+                  <div class="cat-item-mini" style="background:#1E293B; color:#FFF; border-color:#334155"><i class="fas fa-layer-group" style="color:#EA580C"></i><span>Copper</span></div>
+                  <div class="cat-item-mini" style="background:#1E293B; color:#FFF; border-color:#334155"><i class="fas fa-cube" style="color:#EA580C"></i><span>Steel</span></div>
+                  <div class="cat-item-mini" style="background:#1E293B; color:#FFF; border-color:#334155"><i class="fas fa-shield-alt" style="color:#EA580C"></i><span>Aluminium</span></div>
+                  <div class="cat-item-mini" style="background:#1E293B; color:#FFF; border-color:#334155"><i class="fas fa-coins" style="color:#EA580C"></i><span>Brass</span></div>
+                </div>
+              </div>
+              <div class="phone-nav-bar" style="background:#0F172A; border-color:#1E293B">
+                <div class="nav-item active"><i class="fas fa-home"></i><span>Home</span></div>
+                <div class="nav-item"><i class="fas fa-box"></i><span>Products</span></div>
+                <div class="nav-item"><i class="fas fa-chart-bar"></i><span>Live Prices</span></div>
+                <div class="nav-item"><i class="fas fa-file-contract"></i><span>Quotes</span></div>
+                <div class="nav-item"><i class="fas fa-user"></i><span>Profile</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right Mobile Phone (App Login) -->
+          <div class="phone-frame metal-phone-right">
+            <div class="phone-screen dark-phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status-bar" style="color:#FFF">
+                <span>12:00</span>
+                <div class="status-icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></div>
+              </div>
+              <div class="phone-app-header" style="color:#FFF">
+                <div class="app-logo-mini">
+                  <img src="../assets/images/logos/graven-automation-official.svg" alt="logo" />
+                  <strong style="color:#FFF">GRAVEN METALS</strong>
+                </div>
+              </div>
+              <div style="padding:10px 8px; display:flex; flex-direction:column; gap:5px">
+                <div style="font-size:10px; font-weight:800; color:#FFF">Welcome Back</div>
+                <div style="font-size:6.5px; color:#94A3B8; margin-bottom:4px">Sign in to continue to your account</div>
+                <div style="background:#1E293B; border:1px solid #334155; border-radius:4px; padding:4px 6px; font-size:6.5px; color:#94A3B8"><i class="far fa-envelope"></i> Email Address</div>
+                <div style="background:#1E293B; border:1px solid #334155; border-radius:4px; padding:4px 6px; font-size:6.5px; color:#94A3B8; display:flex; justify-content:space-between"><i class="fas fa-lock"></i> Password <i class="far fa-eye"></i></div>
+                <div style="display:flex; justify-content:space-between; font-size:6px; color:#94A3B8">
+                  <span><input type="checkbox" checked style="width:6px; height:6px"> Remember Me</span>
+                  <span style="color:#EA580C">Forgot Password?</span>
+                </div>
+                <button style="background:#FF4500; color:#FFF; border:none; border-radius:5px; padding:5px; font-size:7.5px; font-weight:700; margin-top:4px">Login →</button>
+                <div style="font-size:6px; text-align:center; color:#94A3B8; margin-top:4px">Don't have an account? <span style="color:#EA580C">Create Account</span></div>
+                <div style="font-size:6px; text-align:center; color:#CBD5E1; margin-top:2px">Continue as Guest</div>
+                <div style="font-size:5.5px; text-align:center; color:#64748B; margin-top:6px"><i class="fas fa-shield-alt"></i> Your data is safe and secure</div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Platform / Role / Duration / Status Stat Cards Row -->
+        <div class="graven-stats-grid">
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-phone"><i class="fas fa-mobile-alt"></i></div>
+            <div class="stat-label">Platform</div>
+            <div class="stat-value">Android + Web</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-user"><i class="fas fa-user-tie"></i></div>
+            <div class="stat-label">Role</div>
+            <div class="stat-value">Software Engineer</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-calendar"><i class="far fa-calendar-alt"></i></div>
+            <div class="stat-label">Duration</div>
+            <div class="stat-value">Feb 2026 – Present</div>
+          </div>
+          <div class="graven-stat-card">
+            <div class="stat-icon icon-rocket"><i class="fas fa-rocket"></i></div>
+            <div class="stat-label">Status</div>
+            <div class="stat-value live-val">Production Live <span class="green-dot"></span></div>
+          </div>
+        </div>
+        
+        <!-- Project Impact -->
+        <div class="graven-card impact-card">
+          <div class="graven-card-title">
+            <i class="fas fa-chart-line icon-orange"></i>
+            <h3>Project Impact</h3>
+          </div>
+          <ul class="impact-list">
+            <li><i class="fas fa-check-circle impact-check"></i> Streamlined RFQ workflow, reducing manual effort by 60%</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Improved application performance and load time significantly</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Enhanced user experience, increasing customer satisfaction</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Real-time metal prices and inventory for better decisions</li>
+            <li><i class="fas fa-check-circle impact-check"></i> Helped in business growth and digital transformation</li>
+          </ul>
+          <div class="impact-bg-graphic">
+            <svg viewBox="0 0 100 100" fill="none"><path d="M10 90 L40 60 L60 70 L90 20" stroke="#FF5722" stroke-width="4" stroke-linecap="round" opacity="0.12"/><path d="M70 20 L90 20 L90 40" stroke="#FF5722" stroke-width="4" stroke-linecap="round" opacity="0.12"/></svg>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Footer Actions -->
+    <div class="graven-footer">
+      <div class="graven-footer-left">
+        <span class="graven-pill-badge pill-green"><span class="live-dot"></span> Production Live</span>
+      </div>
+      <div class="graven-footer-right">
+        <button class="btn-graven-close" id="closeGravenMetalModalBottom" type="button">Close</button>
+        <a href="https://gravenmetal.com" target="_blank" rel="noreferrer" class="btn-graven-playstore">
+          Visit Website <i class="fas fa-globe"></i>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.gravenautomation" target="_blank" rel="noreferrer" class="btn-graven-secondary-link">
+          <i class="fab fa-google-play"></i> Download App
+        </a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
 <!-- scroll top btn -->
 <a href="#work" class="fas fa-angle-up" id="scroll-top" aria-label="Scroll to top"></a>
 <!-- scroll back to top -->
@@ -97,8 +819,8 @@
 
 <!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
 
-<script src="../assets/js/project-catalog.js"></script>
-<script src="./script.js"></script>
+<script src="../assets/js/project-catalog.js?v=20260805_v6"></script>
+<script src="./script.js?v=20260805_v6"></script>
 
 </body>
 </html>

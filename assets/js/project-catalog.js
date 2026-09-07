@@ -11,6 +11,7 @@ window.PortfolioProjectCatalog = (function () {
     }
 
     function parseGitHubRepo(url = "") {
+        if (!url) return null;
         try {
             const parsed = new URL(url);
 
@@ -105,7 +106,8 @@ window.PortfolioProjectCatalog = (function () {
     }
 
     async function load(path) {
-        const response = await fetch(path);
+        const cacheBuster = (path.includes("?") ? "&" : "?") + "v=" + Date.now();
+        const response = await fetch(path + cacheBuster);
 
         if (!response.ok) {
             throw new Error(`Unable to load project catalog: ${response.status}`);
@@ -130,57 +132,129 @@ window.PortfolioProjectCatalog = (function () {
         return projects.filter((project) => project.category === filter);
     }
 
-    function getPrimaryAction(project) {
-        if (project.links.demo) {
-            return {
-                href: project.links.demo,
-                label: "Live Demo",
-            };
+    function resolveAssetPath(path) {
+        if (!path) return "";
+        if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:") || path.startsWith("../") || path.startsWith("/")) {
+            return path;
         }
-
-        return {
-            href: project.links.code,
-            label: "Open Repo",
-        };
+        const isSubfolder = window.location.pathname.includes("/projects/");
+        if (isSubfolder) {
+            return "../" + path.replace(/^\.\//, "");
+        }
+        return path;
     }
 
     function renderCard(project) {
-        const primaryAction = getPrimaryAction(project);
-        const ownerName = project.owner || "Saumya Chaurasia";
-        const repoInfo = parseGitHubRepo(project.links.code);
+        const isProfessional = project.category === "professional" || project.isProfessional;
+        const hasCodeLink = Boolean(project.links && project.links.code);
+        const repoInfo = hasCodeLink ? parseGitHubRepo(project.links.code) : null;
+        const imgSrc = resolveAssetPath(project.image);
+        const logoSrc = resolveAssetPath(project.companyLogo);
+        
         const tags = (project.tags || [])
-            .slice(0, 4)
             .map((tag) => `<span class="project-card__tag">${escapeHtml(tag)}</span>`)
             .join("");
-        const badgeMarkup = project.featured
-            ? '<span class="project-card__badge">Featured</span>'
-            : "";
-        const githubMetaMarkup = repoInfo
-            ? `<p class="project-card__meta" data-repo-key="${escapeHtml(repoInfo.key)}">GitHub stats loading...</p>`
-            : '<p class="project-card__meta">GitHub stats unavailable</p>';
+
+        if (isProfessional) {
+            const logoMarkup = project.companyLogo
+                ? `<img src="${escapeHtml(logoSrc)}" class="company-logo" alt="${escapeHtml(project.company || project.name)} logo" />`
+                : `<i class="fas fa-building company-icon" aria-hidden="true"></i>`;
+
+            const featurePillsList = (project.featurePills || ["Product Catalog", "Authentication", "REST APIs", "RFQ System"]).slice(0, 4);
+            const featurePillsMarkup = featurePillsList
+                .map((f) => `<span class="feature-pill"><i class="fas fa-check" aria-hidden="true"></i> ${escapeHtml(f)}</span>`)
+                .join("");
+
+            return `
+            <article class="box box--professional" data-category="professional">
+              <div class="project-card__media project-card__media--prominent">
+                <span class="project-card__badge-small">💼 Professional</span>
+                <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.imageAlt || project.name)}" loading="lazy" />
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__title-row">
+                  ${logoMarkup}
+                  <h3 class="project-card__title">${escapeHtml(project.name)}</h3>
+                </div>
+                <p class="project-card__role-sub">
+                  <i class="fas fa-user-tie" aria-hidden="true"></i>
+                  ${escapeHtml(project.roleDisplay || (project.role + " • " + (project.company || "Company")))}
+                </p>
+                <p class="project-card__desc">${escapeHtml(project.summary || project.description || "")}</p>
+                
+                <div class="project-card__feature-pills">
+                  ${featurePillsMarkup}
+                </div>
+
+                <div class="project-card__tags project-card__tags--compact">${tags}</div>
+
+                <div class="project-card__footer-info">
+                  <span><strong>Platform:</strong> ${escapeHtml(project.platform || "Android • Web")}</span>
+                  <span><strong>Status:</strong> ${escapeHtml(project.status || "Production")}</span>
+                </div>
+
+                <div class="project-card__actions project-card__actions--right">
+                  <button type="button" class="btn-contribution-compact" onclick="window.openContributionModal &amp;&amp; window.openContributionModal('${escapeHtml(project.id)}')">
+                    <span>View Contribution</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </article>`;
+        }
+
+        const badgeMarkup = project.featured ? '<span class="project-card__badge">Featured</span>' : "";
+        const labelMarkup = `<span class="project-card__label">${escapeHtml(project.label || "Project")}</span>`;
+        const roleMarkup = project.role ? `<p class="project-card__role"><i class="fas fa-user-tag" aria-hidden="true"></i> ${escapeHtml(project.role)}</p>` : `<p class="project-card__owner">Built by Saumya Chaurasia</p>`;
+
+        let metaMarkup = "";
+        if (repoInfo) {
+            metaMarkup = `<p class="project-card__meta" data-repo-key="${escapeHtml(repoInfo.key)}">GitHub stats loading...</p>`;
+        }
+
+        let actionsMarkup = "";
+        if (project.isPrivate) {
+            actionsMarkup = `
+            <button type="button" class="project-card__link project-card__link--primary" onclick="window.openWorklensModal &amp;&amp; window.openWorklensModal()">
+              <i class="fas fa-file-alt" aria-hidden="true"></i>
+              <span>Case Study</span>
+            </button>
+            <span class="project-card__link" style="background: rgba(16, 25, 66, 0.08); border-color: rgba(16, 25, 66, 0.2); color: #5d6785; cursor: default;">
+              <i class="fas fa-rocket" aria-hidden="true"></i>
+              <span>Coming Soon</span>
+            </span>`;
+        } else {
+            if (hasCodeLink) {
+                actionsMarkup += `
+                <a href="${escapeHtml(project.links.code)}" class="project-card__link" target="_blank" rel="noreferrer">
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <span>Code</span>
+                </a>`;
+            }
+            if (project.links && project.links.demo) {
+                actionsMarkup += `
+                <a href="${escapeHtml(project.links.demo)}" class="project-card__link project-card__link--primary" target="_blank" rel="noreferrer">
+                  <span>Live Demo</span>
+                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>`;
+            }
+        }
 
         return `
         <article class="box" data-category="${escapeHtml(project.category)}" data-featured="${project.featured ? "true" : "false"}">
           <div class="project-card__media">
             ${badgeMarkup}
-            <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt || project.name)}" loading="lazy" />
+            <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(project.imageAlt || project.name)}" loading="lazy" />
           </div>
           <div class="project-card__body">
-            <span class="project-card__label">${escapeHtml(project.label || "Project")}</span>
+            ${labelMarkup}
             <h3 class="project-card__title">${escapeHtml(project.name)}</h3>
-            <p class="project-card__owner">Built by ${escapeHtml(ownerName)}</p>
-            ${githubMetaMarkup}
+            ${roleMarkup}
+            ${metaMarkup}
             <p class="project-card__desc">${escapeHtml(project.summary || project.description || "")}</p>
             <div class="project-card__tags">${tags}</div>
             <div class="project-card__actions">
-              <a href="${escapeHtml(project.links.code)}" class="project-card__link" target="_blank" rel="noreferrer">
-                <i class="fab fa-github" aria-hidden="true"></i>
-                <span>Code</span>
-              </a>
-              <a href="${escapeHtml(primaryAction.href)}" class="project-card__link project-card__link--primary" target="_blank" rel="noreferrer">
-                <span>${escapeHtml(primaryAction.label)}</span>
-                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
+              ${actionsMarkup}
             </div>
           </div>
         </article>`;

@@ -141,7 +141,9 @@
             return;
         }
 
-        timeline.innerHTML = experiences.map((experience, index) => buildExperienceCard(experience, index)).join("");
+        if (timeline.children.length === 0) {
+            timeline.innerHTML = experiences.map((experience, index) => buildExperienceCard(experience, index)).join("");
+        }
     }
 
     global.PortfolioExperience = {

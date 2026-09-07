@@ -65,7 +65,7 @@ function renderProjects(filter = "all") {
     window.PortfolioProjectCatalog.render(container, projects);
     setProjectsStatus("", false);
 
-    if (!shouldReduceEffects) {
+    if (!shouldReduceEffects && window.srtop) {
         srtop.reveal(".work .box", { interval: 120 });
     }
 }
@@ -78,7 +78,17 @@ async function initProjectArchive() {
     }
 
     try {
-        projectCatalog = await window.PortfolioProjectCatalog.load("../assets/data/projects.json");
+        const rawCatalog = await window.PortfolioProjectCatalog.load("../assets/data/projects.json");
+        projectCatalog = rawCatalog.map((p) => {
+            const updated = { ...p };
+            if (updated.image && updated.image.startsWith("./")) {
+                updated.image = "../" + updated.image.slice(2);
+            }
+            if (updated.companyLogo && updated.companyLogo.startsWith("./")) {
+                updated.companyLogo = "../" + updated.companyLogo.slice(2);
+            }
+            return updated;
+        });
         renderProjects(activeFilter);
     } catch (error) {
         console.error(error);
@@ -86,6 +96,271 @@ async function initProjectArchive() {
         setProjectsStatus("Project archive could not be loaded right now. Please refresh and try again.", true);
     }
 }
+
+window._modalPrevScrollY = window._modalPrevScrollY ?? null;
+
+function openModalContainer(modal) {
+    if (!modal) return;
+    if (window._modalPrevScrollY === null) {
+        window._modalPrevScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    }
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    modal.scrollTop = 0;
+    const innerContent = modal.querySelector(".glass-modal, .graven-modal-content, .modal-content");
+    if (innerContent) {
+        innerContent.scrollTop = 0;
+    }
+
+    modal.classList.add("is-active");
+    modal.setAttribute("aria-hidden", "false");
+}
+
+function closeModalContainer(modal) {
+    if (modal) {
+        modal.classList.remove("is-active");
+        modal.setAttribute("aria-hidden", "true");
+    }
+    const activeModals = document.querySelectorAll(".modal-overlay.is-active");
+    if (activeModals.length === 0) {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        if (window._modalPrevScrollY !== null) {
+            const restoreY = window._modalPrevScrollY;
+            window._modalPrevScrollY = null;
+            window.scrollTo({
+                top: restoreY,
+                left: 0,
+                behavior: "instant"
+            });
+        }
+    }
+}
+
+window.openWorklensModal = function () {
+    const modal = document.getElementById("worklensModal");
+    if (modal) {
+        openModalContainer(modal);
+    }
+};
+
+window.closeWorklensModal = function () {
+    const modal = document.getElementById("worklensModal");
+    if (modal) {
+        closeModalContainer(modal);
+    }
+};
+
+function initWorklensModal() {
+    const openBtn = document.getElementById("openWorklensModal");
+    const closeBtn = document.getElementById("closeWorklensModal");
+    const closeBtnBottom = document.getElementById("closeWorklensModalBottom");
+    const modal = document.getElementById("worklensModal");
+
+    if (openBtn) {
+        openBtn.addEventListener("click", window.openWorklensModal);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", window.closeWorklensModal);
+    }
+
+    if (closeBtnBottom) {
+        closeBtnBottom.addEventListener("click", window.closeWorklensModal);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                window.closeWorklensModal();
+            }
+        });
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            window.closeWorklensModal();
+        }
+    });
+}
+
+window.openContributionModal = async function (projectId) {
+    if (projectId === "graven-automation") {
+        const gravenModal = document.getElementById("gravenAutomationModal");
+        if (gravenModal) {
+            openModalContainer(gravenModal);
+            return;
+        }
+    }
+    if (projectId === "graven-metal") {
+        const metalModal = document.getElementById("gravenMetalModal");
+        if (metalModal) {
+            openModalContainer(metalModal);
+            return;
+        }
+    }
+
+    const modal = document.getElementById("contributionModal");
+    if (!modal) return;
+
+    if (!projectCatalog || !projectCatalog.length) {
+        try {
+            const resp = await fetch("../assets/data/projects.json?v=" + Date.now());
+            projectCatalog = await resp.json();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const project = (projectCatalog || []).find((p) => p.id === projectId);
+    if (!project) return;
+
+    const titleEl = document.getElementById("contribTitle");
+    const roleEl = document.getElementById("contribRole");
+    const descEl = document.getElementById("contribDesc");
+    const tagsEl = document.getElementById("contribTags");
+    const highlightsEl = document.getElementById("contribHighlights");
+    const highlightsSec = document.getElementById("contribHighlightsSection");
+
+    if (titleEl) titleEl.textContent = project.name;
+    if (roleEl) roleEl.innerHTML = `<i class="fas fa-user-tie"></i> <strong>Role:</strong> ${project.role || "Software Engineer"}`;
+    if (descEl) descEl.textContent = project.description || project.summary;
+    
+    if (highlightsEl) {
+        if (project.highlights && project.highlights.length) {
+            highlightsEl.innerHTML = project.highlights
+                .map((h) => `<li><i class="fas fa-check-circle" style="color: #6f43ff; margin-right: 0.6rem;"></i>${h}</li>`)
+                .join("");
+            if (highlightsSec) highlightsSec.style.display = "block";
+        } else if (highlightsSec) {
+            highlightsSec.style.display = "none";
+        }
+    }
+
+    if (tagsEl) {
+        tagsEl.innerHTML = (project.tags || [])
+            .map((t) => `<span class="tech-tag">${t}</span>`)
+            .join("");
+    }
+
+    openModalContainer(modal);
+};
+
+window.closeContributionModal = function () {
+    const modal = document.getElementById("contributionModal");
+    const gravenModal = document.getElementById("gravenAutomationModal");
+    const metalModal = document.getElementById("gravenMetalModal");
+    
+    if (modal) {
+        modal.classList.remove("is-active");
+        modal.setAttribute("aria-hidden", "true");
+    }
+    if (gravenModal) {
+        gravenModal.classList.remove("is-active");
+        gravenModal.setAttribute("aria-hidden", "true");
+    }
+    if (metalModal) {
+        metalModal.classList.remove("is-active");
+        metalModal.setAttribute("aria-hidden", "true");
+    }
+
+    const activeModals = document.querySelectorAll(".modal-overlay.is-active");
+    if (activeModals.length === 0) {
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        if (window._modalPrevScrollY !== null) {
+            const restoreY = window._modalPrevScrollY;
+            window._modalPrevScrollY = null;
+            window.scrollTo({
+                top: restoreY,
+                left: 0,
+                behavior: "instant"
+            });
+        }
+    }
+};
+
+function initContributionModal() {
+    const closeBtn = document.getElementById("closeContribModal");
+    const closeBtnBottom = document.getElementById("closeContribModalBottom");
+    const modal = document.getElementById("contributionModal");
+
+    const closeGravenBtn = document.getElementById("closeGravenModal");
+    const closeGravenBtnBottom = document.getElementById("closeGravenModalBottom");
+    const gravenModal = document.getElementById("gravenAutomationModal");
+
+    const closeMetalBtn = document.getElementById("closeGravenMetalModal");
+    const closeMetalBtnBottom = document.getElementById("closeGravenMetalModalBottom");
+    const metalModal = document.getElementById("gravenMetalModal");
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", window.closeContributionModal);
+    }
+    if (closeBtnBottom) {
+        closeBtnBottom.addEventListener("click", window.closeContributionModal);
+    }
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                window.closeContributionModal();
+            }
+        });
+    }
+
+    if (closeGravenBtn) {
+        closeGravenBtn.addEventListener("click", window.closeContributionModal);
+    }
+    if (closeGravenBtnBottom) {
+        closeGravenBtnBottom.addEventListener("click", window.closeContributionModal);
+    }
+    if (gravenModal) {
+        gravenModal.addEventListener("click", (e) => {
+            if (e.target === gravenModal) {
+                window.closeContributionModal();
+            }
+        });
+    }
+
+    if (closeMetalBtn) {
+        closeMetalBtn.addEventListener("click", window.closeContributionModal);
+    }
+    if (closeMetalBtnBottom) {
+        closeMetalBtnBottom.addEventListener("click", window.closeContributionModal);
+    }
+    if (metalModal) {
+        metalModal.addEventListener("click", (e) => {
+            if (e.target === metalModal) {
+                window.closeContributionModal();
+            }
+        });
+    }
+
+    const playStoreUrl = "https://play.google.com/store/apps/details?id=com.gravenautomation&pli=1";
+    const btnPlayStoreInstall = document.getElementById("btnPlayStoreInstall");
+    const btnViewOnPlayStore = document.getElementById("btnViewOnPlayStore");
+
+    if (btnPlayStoreInstall) {
+        btnPlayStoreInstall.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(playStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnViewOnPlayStore) {
+        btnViewOnPlayStore.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(playStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            window.closeContributionModal();
+        }
+    });
+}
+
+
 
 function initChatWidget() {
     if (chatWidgetLoaded) {
@@ -141,6 +416,9 @@ $(document).ready(function () {
 
         updateScrollTopButton();
     });
+
+    initWorklensModal();
+    initContributionModal();
 });
 
 document.addEventListener("visibilitychange", function () {
