@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none">
+  <!-- House Roof & Body in navy blue -->
+  <path d="M80 16L20 64V134C20 137.3 22.7 140 26 140H134C137.3 140 140 137.3 140 134V64L80 16Z" fill="#0A2540"/>
+  <!-- Light roof accent -->
+  <path d="M80 28L32 68V130H128V68L80 28Z" fill="#FFFFFF"/>
+  <!-- Appliance / Gear Silhouette inside -->
+  <rect x="44" y="60" width="32" height="32" rx="4" fill="#0A2540"/>
+  <rect x="52" y="68" width="16" height="16" rx="2" fill="#FFFFFF"/>
+  <rect x="84" y="60" width="32" height="32" rx="4" fill="#0A2540"/>
+  <circle cx="100" cy="76" r="8" fill="#FFFFFF"/>
+  <circle cx="100" cy="76" r="4" fill="#0A2540"/>
+  <rect x="44" y="100" width="72" height="20" rx="4" fill="#0A2540"/>
+  <circle cx="56" cy="110" r="4" fill="#00D4B2"/>
+  <circle cx="70" cy="110" r="4" fill="#38BDF8"/>
+  <rect x="82" y="107" width="26" height="6" rx="3" fill="#FFFFFF"/>
+</svg>

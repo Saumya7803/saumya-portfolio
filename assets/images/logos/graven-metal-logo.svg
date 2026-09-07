@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <rect width="120" height="120" rx="20" fill="#090d16"/>
+  <g transform="translate(32, 16)">
+    <!-- Top Face -->
+    <polygon points="28,0 54,15 28,30 2,15" fill="#FBBF24"/>
+    <!-- Left Face -->
+    <polygon points="2,15 28,30 28,60 2,45" fill="#D97706"/>
+    <!-- Right Face -->
+    <polygon points="28,30 54,15 54,45 28,60" fill="#B45309"/>
+  </g>
+  <text x="60" y="93" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', 'Poppins', 'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="800" letter-spacing="1.5">GRAVEN</text>
+  <text x="60" y="107" text-anchor="middle" fill="#F59E0B" font-family="'Inter', 'Poppins', 'Segoe UI', system-ui, sans-serif" font-size="10.5" font-weight="700" letter-spacing="2">METAL</text>
+</svg>

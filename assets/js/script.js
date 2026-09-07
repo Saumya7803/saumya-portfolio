@@ -214,10 +214,38 @@ window.openContributionModal = async function (projectId) {
             return;
         }
     }
+    if (projectId === "schneider-vfd") {
+        const schneiderModal = document.getElementById("schneiderVfdModal");
+        if (schneiderModal) {
+            openModalContainer(schneiderModal);
+            return;
+        }
+    }
     if (projectId === "graven-metal") {
         const metalModal = document.getElementById("gravenMetalModal");
         if (metalModal) {
             openModalContainer(metalModal);
+            return;
+        }
+    }
+    if (projectId === "cleanora") {
+        const cleanoraModal = document.getElementById("cleanoraModal");
+        if (cleanoraModal) {
+            openModalContainer(cleanoraModal);
+            return;
+        }
+    }
+    if (projectId === "smart-home-appliances") {
+        const smartHomeModal = document.getElementById("smartHomeModal");
+        if (smartHomeModal) {
+            openModalContainer(smartHomeModal);
+            return;
+        }
+    }
+    if (projectId === "navrise-marketing-agency") {
+        const navriseModal = document.getElementById("navriseModal");
+        if (navriseModal) {
+            openModalContainer(navriseModal);
             return;
         }
     }
@@ -271,7 +299,11 @@ window.openContributionModal = async function (projectId) {
 window.closeContributionModal = function () {
     const modal = document.getElementById("contributionModal");
     const gravenModal = document.getElementById("gravenAutomationModal");
+    const schneiderModal = document.getElementById("schneiderVfdModal");
     const metalModal = document.getElementById("gravenMetalModal");
+    const cleanoraModal = document.getElementById("cleanoraModal");
+    const smartHomeModal = document.getElementById("smartHomeModal");
+    const navriseModal = document.getElementById("navriseModal");
     
     if (modal) {
         modal.classList.remove("is-active");
@@ -281,9 +313,25 @@ window.closeContributionModal = function () {
         gravenModal.classList.remove("is-active");
         gravenModal.setAttribute("aria-hidden", "true");
     }
+    if (schneiderModal) {
+        schneiderModal.classList.remove("is-active");
+        schneiderModal.setAttribute("aria-hidden", "true");
+    }
     if (metalModal) {
         metalModal.classList.remove("is-active");
         metalModal.setAttribute("aria-hidden", "true");
+    }
+    if (cleanoraModal) {
+        cleanoraModal.classList.remove("is-active");
+        cleanoraModal.setAttribute("aria-hidden", "true");
+    }
+    if (smartHomeModal) {
+        smartHomeModal.classList.remove("is-active");
+        smartHomeModal.setAttribute("aria-hidden", "true");
+    }
+    if (navriseModal) {
+        navriseModal.classList.remove("is-active");
+        navriseModal.setAttribute("aria-hidden", "true");
     }
 
     const activeModals = document.querySelectorAll(".modal-overlay.is-active");
@@ -311,9 +359,25 @@ function initContributionModal() {
     const closeGravenBtnBottom = document.getElementById("closeGravenModalBottom");
     const gravenModal = document.getElementById("gravenAutomationModal");
 
+    const closeSchneiderBtn = document.getElementById("closeSchneiderVfdModal");
+    const closeSchneiderBtnBottom = document.getElementById("closeSchneiderVfdModalBottom");
+    const schneiderModal = document.getElementById("schneiderVfdModal");
+
     const closeMetalBtn = document.getElementById("closeGravenMetalModal");
     const closeMetalBtnBottom = document.getElementById("closeGravenMetalModalBottom");
     const metalModal = document.getElementById("gravenMetalModal");
+
+    const closeCleanoraBtn = document.getElementById("closeCleanoraModal");
+    const closeCleanoraBtnBottom = document.getElementById("closeCleanoraModalBottom");
+    const cleanoraModal = document.getElementById("cleanoraModal");
+
+    const closeSmartHomeBtn = document.getElementById("closeSmartHomeModal");
+    const closeSmartHomeBtnBottom = document.getElementById("closeSmartHomeModalBottom");
+    const smartHomeModal = document.getElementById("smartHomeModal");
+
+    const closeNavriseBtn = document.getElementById("closeNavriseModal");
+    const closeNavriseBtnBottom = document.getElementById("closeNavriseModalBottom");
+    const navriseModal = document.getElementById("navriseModal");
 
     if (closeBtn) closeBtn.addEventListener("click", window.closeContributionModal);
     if (closeBtnBottom) closeBtnBottom.addEventListener("click", window.closeContributionModal);
@@ -331,11 +395,43 @@ function initContributionModal() {
         });
     }
 
+    if (closeSchneiderBtn) closeSchneiderBtn.addEventListener("click", window.closeContributionModal);
+    if (closeSchneiderBtnBottom) closeSchneiderBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (schneiderModal) {
+        schneiderModal.addEventListener("click", (e) => {
+            if (e.target === schneiderModal) window.closeContributionModal();
+        });
+    }
+
     if (closeMetalBtn) closeMetalBtn.addEventListener("click", window.closeContributionModal);
     if (closeMetalBtnBottom) closeMetalBtnBottom.addEventListener("click", window.closeContributionModal);
     if (metalModal) {
         metalModal.addEventListener("click", (e) => {
             if (e.target === metalModal) window.closeContributionModal();
+        });
+    }
+
+    if (closeCleanoraBtn) closeCleanoraBtn.addEventListener("click", window.closeContributionModal);
+    if (closeCleanoraBtnBottom) closeCleanoraBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (cleanoraModal) {
+        cleanoraModal.addEventListener("click", (e) => {
+            if (e.target === cleanoraModal) window.closeContributionModal();
+        });
+    }
+
+    if (closeSmartHomeBtn) closeSmartHomeBtn.addEventListener("click", window.closeContributionModal);
+    if (closeSmartHomeBtnBottom) closeSmartHomeBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (smartHomeModal) {
+        smartHomeModal.addEventListener("click", (e) => {
+            if (e.target === smartHomeModal) window.closeContributionModal();
+        });
+    }
+
+    if (closeNavriseBtn) closeNavriseBtn.addEventListener("click", window.closeContributionModal);
+    if (closeNavriseBtnBottom) closeNavriseBtnBottom.addEventListener("click", window.closeContributionModal);
+    if (navriseModal) {
+        navriseModal.addEventListener("click", (e) => {
+            if (e.target === navriseModal) window.closeContributionModal();
         });
     }
 
@@ -353,6 +449,74 @@ function initContributionModal() {
         btnViewOnPlayStore.addEventListener("click", (e) => {
             e.preventDefault();
             window.open(playStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const schneiderPlayStoreUrl = "https://play.google.com/store/apps/details?id=com.gravenautomation.electric_app";
+    const btnSchneiderPlayStoreInstall = document.getElementById("btnSchneiderPlayStoreInstall");
+    const btnSchneiderFooterVisit = document.getElementById("btnSchneiderFooterVisit");
+
+    if (btnSchneiderPlayStoreInstall) {
+        btnSchneiderPlayStoreInstall.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(schneiderPlayStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnSchneiderFooterVisit) {
+        btnSchneiderFooterVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(schneiderPlayStoreUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const smartHomeUrl = "https://smarthomeappliances.in/";
+    const btnSmartHomeVisit = document.getElementById("btnSmartHomeVisit");
+    const btnSmartHomeFooterVisit = document.getElementById("btnSmartHomeFooterVisit");
+
+    if (btnSmartHomeVisit) {
+        btnSmartHomeVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(smartHomeUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnSmartHomeFooterVisit) {
+        btnSmartHomeFooterVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(smartHomeUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const navriseUrl = "https://navrise-agency-website.vercel.app/";
+    const btnNavriseVisit = document.getElementById("btnNavriseVisit");
+    const btnNavriseFooterVisit = document.getElementById("btnNavriseFooterVisit");
+
+    if (btnNavriseVisit) {
+        btnNavriseVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(navriseUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnNavriseFooterVisit) {
+        btnNavriseFooterVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(navriseUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+
+    const gravenMetalUrl = "https://graven-metal-frontend.vercel.app/";
+    const btnGravenMetalVisit = document.getElementById("btnGravenMetalVisit");
+    const btnGravenMetalFooterVisit = document.getElementById("btnGravenMetalFooterVisit");
+
+    if (btnGravenMetalVisit) {
+        btnGravenMetalVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(gravenMetalUrl, "_blank", "noopener,noreferrer");
+        });
+    }
+    if (btnGravenMetalFooterVisit) {
+        btnGravenMetalFooterVisit.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.open(gravenMetalUrl, "_blank", "noopener,noreferrer");
         });
     }
 }

@@ -4256,4 +4256,437 @@ form .button-area {
   }
 }
 
+/* ==========================================================================
+   Smart Home Appliances Modal Specific Styles
+   ========================================================================== */
+.check-icon-green {
+  color: #10B981 !important;
+  font-size: 14.5px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.tech-heading-blue {
+  color: #2563EB !important;
+}
+
+.icon-blue {
+  color: #2563EB !important;
+  font-size: 16px;
+}
+
+.icon-monitor { color: #EA580C !important; }
+.icon-user-green { color: #10B981 !important; }
+.icon-calendar-amber { color: #D97706 !important; }
+.icon-rocket-purple { color: #8B5CF6 !important; }
+
+/* Smart Home Appliances Devices Mockup Container */
+.smarthome-devices-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 4px 0;
+}
+
+.smarthome-devices-hero-img {
+  width: 100%;
+  max-width: 490px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.12));
+  transition: transform 0.3s ease;
+}
+
+.smarthome-devices-hero-img:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
+/* Smart Home Appliances Live Website Section */
+.smarthome-live-section {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 20px 22px;
+  margin-top: 22px;
+}
+
+.live-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.live-link-icon {
+  font-size: 20px;
+  color: #2563EB;
+  flex-shrink: 0;
+}
+
+.live-header-text {
+  line-height: 1.25;
+}
+
+.live-heading {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+  letter-spacing: -0.2px;
+}
+
+.live-subheading {
+  font-size: 12.5px;
+  color: #64748B;
+  margin: 0;
+  font-weight: 500;
+}
+
+.live-section-content {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.live-brand-box {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 18px 16px;
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  text-align: center;
+}
+
+.live-brand-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.live-brand-logo-img {
+  max-height: 56px;
+  max-width: 170px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.live-url-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563EB;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+  transition: color 0.2s ease;
+}
+
+.live-url-link:hover {
+  color: #1D4ED8;
+  text-decoration: underline;
+}
+
+.btn-smarthome-visit {
+  width: 100%;
+  background: #2563EB;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn-smarthome-visit:hover {
+  background: #1D4ED8;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
+  transform: translateY(-1px);
+}
+
+.live-previews-row {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.live-preview-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  background: #FFFFFF;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+}
+
+.live-preview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.live-preview-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Smart Home Footer Buttons */
+.btn-smarthome-live-outline {
+  background: #FFFFFF;
+  color: #2563EB !important;
+  border: 1.5px solid #DBEAFE;
+  border-radius: 24px;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-smarthome-live-outline:hover {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+  color: #1D4ED8 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+.btn-smarthome-close-action {
+  background: #4F46E5;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 24px;
+  padding: 9px 26px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-smarthome-close-action:hover {
+  background: #4338CA;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* Graven Metal Modal Specific Styles */
+.check-icon-orange {
+  color: #EA580C;
+  font-size: 14.5px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.tech-heading-purple h3 {
+  color: #4F46E5 !important;
+}
+
+.icon-purple {
+  color: #4F46E5 !important;
+}
+
+.graven-live-metal {
+  background: #FFFDF9;
+  border: 1px solid #FED7AA;
+}
+
+.btn-metal-visit {
+  width: 100%;
+  background: #EA580C;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn-metal-visit:hover {
+  background: #C2410C;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.28);
+  transform: translateY(-1px);
+}
+
+.live-previews-row.three-previews {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ==========================================================================
+   Cleanorá Modal Specific Styles
+   ========================================================================== */
+.cleanora-roles-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.cleanora-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #EBFDF3;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+  border-radius: 9999px;
+  padding: 5px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.cleanora-previews-section {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.cleanora-previews-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cleanora-previews-header i {
+  color: #EA580C;
+  font-size: 20px;
+}
+
+.cleanora-previews-header h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.cleanora-previews-header p {
+  font-size: 13px;
+  color: #64748B;
+  margin: 2px 0 0 0;
+}
+
+.cleanora-screens-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.cleanora-screen-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  aspect-ratio: 9 / 18.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cleanora-screen-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.cleanora-screen-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-cleanora-coming-soon {
+  background: #FFFFFF;
+  color: #4F46E5 !important;
+  border: 1.5px solid #C7D2FE;
+  border-radius: 24px;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.btn-cleanora-coming-soon:hover {
+  background: #EEF2FF;
+  border-color: #A5B4FC;
+  color: #4338CA !important;
+}
+
+@media (max-width: 900px) {
+  .live-section-content {
+    flex-direction: column;
+  }
+  .live-brand-box {
+    flex: 1;
+    width: 100%;
+  }
+  .live-previews-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .live-previews-row.three-previews {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cleanora-screens-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .live-previews-row {
+    grid-template-columns: 1fr;
+  }
+  .live-previews-row.three-previews {
+    grid-template-columns: 1fr;
+  }
+  .cleanora-screens-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 
